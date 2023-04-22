@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace HardwareStoreWeb.Models
 {
@@ -9,10 +10,14 @@ namespace HardwareStoreWeb.Models
         public int Id { get; set; }
 
         public int DetailTypeId { get; set; }
-        public virtual DetailType DetailType { get; set; } = null!;
+
+        [JsonIgnore]
+        public virtual DetailType? DetailType { get; set; }
 
         public int ComponentId { get; set; }
-        public virtual Component Component { get; set; } = null!;
+
+        [JsonIgnore]
+        public virtual Component? Component { get; set; }
 
         [StringLength(128)]
         public required string Value { get; set; }

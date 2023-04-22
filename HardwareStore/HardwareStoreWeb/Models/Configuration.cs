@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 namespace HardwareStoreWeb.Models
 {
@@ -10,6 +11,8 @@ namespace HardwareStoreWeb.Models
         public int Amount { get; set; }
 
         public int ComponentId { get; set; }
-        public virtual Component Component { get; set; } = null!;
+
+        [JsonIgnore]
+        public virtual Component? Component { get; set; }
     }
 }

@@ -1,5 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace HardwareStoreWeb.Models
@@ -9,7 +11,9 @@ namespace HardwareStoreWeb.Models
         public int Id { get; set; }
 
         public int ComponentTypeId { get; set; }
-        public virtual ComponentType ComponentType { get; set; } = null!;
+
+        [JsonIgnore]
+        public virtual ComponentType? ComponentType { get; set; }
 
         [StringLength(256)]
         public required string Name { get; set; }

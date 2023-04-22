@@ -1,5 +1,6 @@
 ﻿using HardwareStoreWeb.Utilities;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace HardwareStoreWeb.Models
 {
@@ -24,12 +25,18 @@ namespace HardwareStoreWeb.Models
         }
 
         public int SupplierId { get; set; }
-        public virtual Supplier Supplier { get; set; } = null!;
+
+        [JsonIgnore]
+        public virtual Supplier? Supplier { get; set; }
 
         public int ComponentId { get; set; }
-        public virtual Component Component { get; set; } = null!;
+
+        [JsonIgnore]
+        public virtual Component? Component { get; set; }
 
         public int WarehouseId { get; set; }
-        public virtual Warehouse Warehouse { get; set; } = null!;
+
+        [JsonIgnore]
+        public virtual Warehouse? Warehouse { get; set; }
     }
 }

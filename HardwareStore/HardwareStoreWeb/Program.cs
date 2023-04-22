@@ -11,7 +11,6 @@ builder.Services.AddDbContext<StoreContext>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.MaxDepth = 1);
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HardwareStoreWeb;
 using HardwareStoreWeb.Models;
+using HardwareStoreWeb.DTOs;
 
 namespace HardwareStoreWeb.Controllers
 {
