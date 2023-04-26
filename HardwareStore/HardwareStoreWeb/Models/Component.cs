@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
@@ -12,26 +13,19 @@ namespace HardwareStoreWeb.Models
 
         public int ComponentTypeId { get; set; }
 
-        [JsonIgnore]
+        [DisplayName("Категория")]
         public virtual ComponentType? ComponentType { get; set; }
 
-        [StringLength(256)]
+        [DisplayName("Название"), StringLength(256)]
         public required string Name { get; set; }
+
+        [DisplayName("Гарантия")]
         public int Warranty { get; set; }
 
-        [JsonIgnore]
         public virtual ICollection<ComponentDetail> ComponentDetails { get; private set; } = new ObservableCollection<ComponentDetail>();
-
-        [JsonIgnore]
         public virtual ICollection<ComponentStorage> ComponentStorages { get; private set; } = new ObservableCollection<ComponentStorage>();
-
-        [JsonIgnore]
         public virtual ICollection<OrderComponent> OrderComponents { get; private set; } = new ObservableCollection<OrderComponent>();
-
-        [JsonIgnore]
         public virtual ICollection<Configuration> Configurations { get; private set; } = new ObservableCollection<Configuration>();
-
-        [JsonIgnore]
         public virtual ICollection<Supply> Supplies { get; private set; } = new ObservableCollection<Supply>();
     }
 }

@@ -1,0 +1,49 @@
+﻿@page
+@model HardwareStoreWeb.Pages.Components.DetailsModel
+
+@{
+    ViewData["Title"] = "Комплектующее";
+}
+
+<div class="row mb-3">
+    <div class="col d-flex d-sm-flex d-md-flex align-items-center align-items-sm-center align-items-md-center justify-content-xl-start col-auto">
+        <h3 class="text-dark mb-0">Комплектующее #@Html.DisplayFor(model => model.Component.Id)</h3>
+    </div>
+</div>
+<div class="card shadow">
+	<div class="card-header py-3">
+        <p class="text-dark m-0 fw-bold">Информация о комплектующем #@Html.DisplayFor(model => model.Component.Id)</p>
+	</div>
+	<div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Component.ComponentType)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Component.ComponentType.Name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Component.Name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Component.Name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Component.Warranty)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Component.Warranty)
+            </dd>
+        </dl>
+        <div class="col d-lg-flex d-xl-flex d-xxl-flex justify-content-lg-start justify-content-xl-start justify-content-xxl-start me-0">
+            <div>
+                <a class="btn btn-dark btn-sm me-2 my-1" role="button" asp-page="./Edit" asp-route-id="@Model.Component?.Id">
+                    <i class="fas fa-pencil-alt fa-sm text-white-50"></i>&nbsp; Изменить
+                </a>
+                <a class="btn btn-dark btn-sm me-2 my-1" role="button" asp-page="./Index">
+                    <i class="fas fa-arrow-left fa-sm text-white-50"></i>&nbsp; Вернуться
+                </a>
+            </div>
+        </div>
+	</div>
+</div>
