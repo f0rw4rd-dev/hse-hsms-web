@@ -30,13 +30,13 @@ namespace HardwareStoreWeb.Pages.Components
                 return NotFound();
             }
 
-            var component =  await _context.Components.FirstOrDefaultAsync(m => m.Id == id);
+            var component = await _context.Components.FirstOrDefaultAsync(m => m.Id == id);
             if (component == null)
             {
                 return NotFound();
             }
             Component = component;
-           ViewData["ComponentTypeId"] = new SelectList(_context.ComponentTypes, "Id", "Id");
+            ViewData["ComponentTypeId"] = new SelectList(_context.ComponentTypes, "Id", "Name");
             return Page();
         }
 
@@ -72,7 +72,7 @@ namespace HardwareStoreWeb.Pages.Components
 
         private bool ComponentExists(int id)
         {
-          return (_context.Components?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Components?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

@@ -21,18 +21,18 @@ namespace HardwareStoreWeb.Pages.Components
 
         public IActionResult OnGet()
         {
-        ViewData["ComponentTypeId"] = new SelectList(_context.ComponentTypes, "Id", "Id");
+            ViewData["ComponentTypeId"] = new SelectList(_context.ComponentTypes, "Id", "Name");
             return Page();
         }
 
         [BindProperty]
         public Component Component { get; set; } = default!;
-        
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.Components == null || Component == null)
+            if (!ModelState.IsValid || _context.Components == null || Component == null)
             {
                 return Page();
             }

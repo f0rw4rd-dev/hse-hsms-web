@@ -11,6 +11,7 @@ namespace HardwareStoreWeb.Models
     {
         public int Id { get; set; }
 
+        [DisplayName("Категория")]
         public int ComponentTypeId { get; set; }
 
         [DisplayName("Категория")]

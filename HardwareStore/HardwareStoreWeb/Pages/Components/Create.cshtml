@@ -2,10 +2,49 @@
 @model HardwareStoreWeb.Pages.Components.CreateModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Добавить комплектующее";
 }
 
-<h1>Create</h1>
+<div class="row mb-3">
+    <div class="col d-flex d-sm-flex d-md-flex align-items-center align-items-sm-center align-items-md-center justify-content-xl-start col-auto">
+        <h3 class="text-dark mb-0">Комплектующие</h3>
+    </div>
+</div>
+<div class="card shadow">
+    <div class="card-header py-3">
+        <p class="text-dark m-0 fw-bold">Добавить комплектующее</p>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            <div class="form-group my-2">
+                <label asp-for="Component.ComponentTypeId" class="control-label"></label>
+                <select asp-for="Component.ComponentTypeId" class="form-control" asp-items="ViewBag.ComponentTypeId"></select>
+            </div>
+            <div class="form-group my-2">
+                <label asp-for="Component.Name" class="control-label"></label>
+                <input asp-for="Component.Name" class="form-control" />
+                <span asp-validation-for="Component.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group my-2">
+                <label asp-for="Component.Warranty" class="control-label"></label>
+                <input asp-for="Component.Warranty" class="form-control" />
+                <span asp-validation-for="Component.Warranty" class="text-danger"></span>
+            </div>
+            <div class="col d-lg-flex d-xl-flex d-xxl-flex justify-content-lg-start justify-content-xl-start justify-content-xxl-start me-0 my-2">
+                <div>
+                    <button type="submit" class="btn btn-dark btn-sm me-2 my-1">
+                        <i class="fas fa-plus fa-sm text-white-50"></i>&nbsp; Добавить
+                    </button>
+                    <a class="btn btn-dark btn-sm me-2 my-1" role="button" asp-page="./Index">
+                        <i class="fas fa-arrow-left fa-sm text-white-50"></i>&nbsp; Вернуться
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@*<h1>Create</h1>
 
 <h4>Component</h4>
 <hr />
@@ -36,7 +75,7 @@
 
 <div>
     <a asp-page="Index">Back to List</a>
-</div>
+</div>*@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

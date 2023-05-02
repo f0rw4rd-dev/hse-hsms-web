@@ -2,10 +2,56 @@
 @model HardwareStoreWeb.Pages.Components.DeleteModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Удалить комплектующее";
 }
 
-<h1>Delete</h1>
+<div class="row mb-3">
+    <div class="col d-flex d-sm-flex d-md-flex align-items-center align-items-sm-center align-items-md-center justify-content-xl-start col-auto">
+        <h3 class="text-dark mb-0">Комплектующие</h3>
+    </div>
+</div>
+<div class="card shadow">
+    <div class="card-header py-3">
+        <p class="text-dark m-0 fw-bold">Удалить комплектующее #@Html.DisplayFor(model => model.Component.Id)</p>
+    </div>
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Component.ComponentType)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Component.ComponentType.Name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Component.Name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Component.Name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Component.Warranty)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Component.Warranty)
+            </dd>
+        </dl>
+        <div class="col d-lg-flex d-xl-flex d-xxl-flex justify-content-lg-start justify-content-xl-start justify-content-xxl-start me-0 my-2">
+            <div>
+                <form method="post">
+                    <input type="hidden" asp-for="Component.Id" />
+                    <button type="submit" class="btn btn-dark btn-sm me-2 my-1">
+                        <i class="fas fa-trash-alt fa-sm text-white-50"></i>&nbsp; Удалить
+                    </button>
+                    <a class="btn btn-dark btn-sm me-2 my-1" role="button" asp-page="./Index">
+                        <i class="fas fa-arrow-left fa-sm text-white-50"></i>&nbsp; Вернуться
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<h1>Delete</h1>
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
@@ -38,3 +84,4 @@
         <a asp-page="./Index">Back to List</a>
     </form>
 </div>
+*@
