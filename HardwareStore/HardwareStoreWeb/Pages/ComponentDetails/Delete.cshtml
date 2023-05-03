@@ -1,44 +1,44 @@
 ﻿@page
-@model HardwareStoreWeb.Pages.Components.DeleteModel
+@model HardwareStoreWeb.Pages.ComponentDetails.DeleteModel
 
 @{
-    ViewData["Title"] = "Удалить комплектующее";
+    ViewData["Title"] = "Удаление характеристики комплектующего";
 }
 
 <div class="row mb-3">
     <div class="col d-flex d-sm-flex d-md-flex align-items-center align-items-sm-center align-items-md-center justify-content-xl-start col-auto">
-        <h3 class="text-dark mb-0">Комплектующие</h3>
+        <h3 class="text-dark mb-0">Характеристики комплектующих</h3>
     </div>
 </div>
 <div class="card shadow">
     <div class="card-header py-3">
-        <p class="text-dark m-0 fw-bold">Удалить комплектующее #@Html.DisplayFor(model => model.Component.Id)</p>
+        <p class="text-dark m-0 fw-bold">Удалить характеристику [@Html.DisplayFor(model => model.ComponentDetail.DetailType!.Id)] комплектующего [@Html.DisplayFor(model => model.ComponentDetail.Component!.Id)]</p>
     </div>
     <div class="card-body">
         <dl class="row mb-0">
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Component.ComponentType)
+                @Html.DisplayNameFor(model => model.ComponentDetail.DetailType)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Component.ComponentType!.Name)
+                [@Html.DisplayFor(model => model.ComponentDetail.DetailType!.Id)] @Html.DisplayFor(model => model.ComponentDetail.DetailType!.Name)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Component.Name)
+                @Html.DisplayNameFor(model => model.ComponentDetail.Component)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Component.Name)
+                [@Html.DisplayFor(model => model.ComponentDetail.Component!.Id)] @Html.DisplayFor(model => model.ComponentDetail.Component!.Name)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Component.Warranty)
+                @Html.DisplayNameFor(model => model.ComponentDetail.Value)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Component.Warranty)
+                @Html.DisplayFor(model => model.ComponentDetail.Value)
             </dd>
         </dl>
         <div class="col d-lg-flex d-xl-flex d-xxl-flex justify-content-lg-start justify-content-xl-start justify-content-xxl-start me-0 my-2">
             <div>
                 <form method="post">
-                    <input type="hidden" asp-for="Component.Id" />
+                    <input type="hidden" asp-for="ComponentDetail.Id" />
                     <button type="submit" class="btn btn-dark btn-sm me-2 my-1">
                         <i class="fas fa-trash-alt fa-sm text-white-50"></i>&nbsp; Удалить
                     </button>
@@ -55,33 +55,32 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Component</h4>
+    <h4>ComponentDetail</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Component.ComponentType)
+            @Html.DisplayNameFor(model => model.ComponentDetail.DetailType)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Component.ComponentType.Id)
+            @Html.DisplayFor(model => model.ComponentDetail.DetailType.Id)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Component.Name)
+            @Html.DisplayNameFor(model => model.ComponentDetail.Component)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Component.Name)
+            @Html.DisplayFor(model => model.ComponentDetail.Component.Id)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Component.Warranty)
+            @Html.DisplayNameFor(model => model.ComponentDetail.Value)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Component.Warranty)
+            @Html.DisplayFor(model => model.ComponentDetail.Value)
         </dd>
     </dl>
     
     <form method="post">
-        <input type="hidden" asp-for="Component.Id" />
+        <input type="hidden" asp-for="ComponentDetail.Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-page="./Index">Back to List</a>
     </form>
-</div>
-*@
+</div>*@

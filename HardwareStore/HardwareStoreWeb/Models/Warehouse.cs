@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
@@ -10,15 +11,16 @@ namespace HardwareStoreWeb.Models
     {
         public int Id { get; set; }
 
-        [StringLength(64)]
+        [DisplayName("Город"), StringLength(64)]
         public required string City { get; set; }
 
-        [StringLength(64)]
+        [DisplayName("Улица"), StringLength(64)]
         public required string Street { get; set; }
 
-        [StringLength(8)]
+        [DisplayName("Дом"), StringLength(8)]
         public required string House { get; set; }
 
+        [DisplayName("Индекс")]
         public int Zip { get; set; }
 
         [JsonIgnore]

@@ -11,16 +11,16 @@ namespace HardwareStoreWeb.Models
     {
         public int Id { get; set; }
 
-        [DisplayName("Категория")]
+        [DisplayName("ИД категории")]
         public int ComponentTypeId { get; set; }
 
-        [DisplayName("Категория")]
+        [DisplayName("Категория"), JsonIgnore]
         public virtual ComponentType? ComponentType { get; set; }
 
         [DisplayName("Название"), StringLength(256)]
         public required string Name { get; set; }
 
-        [DisplayName("Гарантия")]
+        [DisplayName("Гарантия (мес)")]
         public int Warranty { get; set; }
 
         public virtual ICollection<ComponentDetail> ComponentDetails { get; private set; } = new ObservableCollection<ComponentDetail>();

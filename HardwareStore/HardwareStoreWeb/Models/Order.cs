@@ -23,6 +23,8 @@ namespace HardwareStoreWeb.Models
     public class Order
     {
         public int Id { get; set; }
+
+        [DisplayName("Дата заказа")]
         public long Date { get; set; }
 
         [NotMapped]
@@ -38,6 +40,7 @@ namespace HardwareStoreWeb.Models
             }
         }
 
+        [DisplayName("Статус")]
         public OrderStatus Status { get; set; }
 
         [JsonIgnore]

@@ -1,17 +1,17 @@
 ﻿@page
-@model HardwareStoreWeb.Pages.Components.IndexModel
+@model HardwareStoreWeb.Pages.ComponentDetails.IndexModel
 
 @{
-	ViewData["Title"] = "Комплектующие";
+    ViewData["Title"] = "Характеристики комплектующих";
 }
 
 <div class="row mb-3">
 	<div class="col d-flex d-sm-flex d-md-flex align-items-center align-items-sm-center align-items-md-center justify-content-xl-start col-auto">
-		<h3 class="text-dark mb-0">Комплектующие</h3>
+		<h3 class="text-dark mb-0">Характеристики комплектующих</h3>
 	</div>
 	<div class="col d-lg-flex d-xl-flex d-xxl-flex justify-content-lg-end justify-content-xl-end justify-content-xxl-end me-0">
 		<div>
-			<a class="btn btn-dark btn-sm me-2 my-1" role="button" href="Components/Create">
+			<a class="btn btn-dark btn-sm me-2 my-1" role="button" href="ComponentDetails/Create">
 				<i class="fas fa-plus fa-sm text-white-50"></i>&nbsp; Добавить
 			</a>
 			<a class="btn btn-dark btn-sm me-2 my-1" role="button" href="#">
@@ -25,7 +25,7 @@
 </div>
 <div class="card shadow">
 	<div class="card-header py-3">
-		<p class="text-dark m-0 fw-bold">Информация о всех комплектующих</p>
+		<p class="text-dark m-0 fw-bold">Информация о всех характеристиках комплектующих</p>
 	</div>
 	<div class="card-body">
 		<div class="row">
@@ -51,29 +51,29 @@
 				<thead>
 					<tr>
 						<th>
-							@Html.DisplayNameFor(model => model.Component[0].ComponentType)
+							@Html.DisplayNameFor(model => model.ComponentDetail[0].DetailType)
 						</th>
 						<th>
-							@Html.DisplayNameFor(model => model.Component[0].Name)
+							@Html.DisplayNameFor(model => model.ComponentDetail[0].Component)
 						</th>
 						<th>
-							@Html.DisplayNameFor(model => model.Component[0].Warranty)
+							@Html.DisplayNameFor(model => model.ComponentDetail[0].Value)
 						</th>
 						<th></th>
 					</tr>
 				</thead>
 				<tbody>
-					@foreach (var item in Model.Component)
+					@foreach (var item in Model.ComponentDetail)
 					{
 						<tr class="align-middle">
 							<td>
-								@Html.DisplayFor(modelItem => item.ComponentType.Name)
+								[@Html.DisplayFor(modelItem => item.DetailType!.Id)] @Html.DisplayFor(modelItem => item.DetailType!.Name)
 							</td>
 							<td>
-								@Html.DisplayFor(modelItem => item.Name)
+								[@Html.DisplayFor(modelItem => item.Component!.Id)] @Html.DisplayFor(modelItem => item.Component!.Name)
 							</td>
 							<td>
-								@Html.DisplayFor(modelItem => item.Warranty)
+								@Html.DisplayFor(modelItem => item.Value)
 							</td>
 							<td>
 								<a class="btn btn-dark btn-sm me-2 my-1" role="button" asp-page="./Edit" asp-route-id="@item.Id">
@@ -92,13 +92,13 @@
 				<tfoot>
 					<tr>
 						<td>
-							<strong>@Html.DisplayNameFor(model => model.Component[0].ComponentType)</strong>
+							<strong>@Html.DisplayNameFor(model => model.ComponentDetail[0].DetailType)</strong>
 						</td>
 						<td>
-							<strong>@Html.DisplayNameFor(model => model.Component[0].Name)</strong>
+							<strong>@Html.DisplayNameFor(model => model.ComponentDetail[0].Component)</strong>
 						</td>
 						<td>
-							<strong>@Html.DisplayNameFor(model => model.Component[0].Warranty)</strong>
+							<strong>@Html.DisplayNameFor(model => model.ComponentDetail[0].Value)</strong>
 						</td>
 						<td></td>
 					</tr>
@@ -123,3 +123,45 @@
 		</div>
 	</div>
 </div>
+
+@*<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ComponentDetail[0].DetailType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ComponentDetail[0].Component)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ComponentDetail[0].Value)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.ComponentDetail) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DetailType.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Component.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Value)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>*@

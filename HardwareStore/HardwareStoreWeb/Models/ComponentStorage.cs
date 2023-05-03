@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace HardwareStoreWeb.Models
 {
@@ -8,14 +9,16 @@ namespace HardwareStoreWeb.Models
         public float Price { get; set; }
         public int Amount { get; set; }
 
+        [DisplayName("ИД склада")]
         public int WarehouseId { get; set; }
 
-        [JsonIgnore]
+        [DisplayName("Склад"), JsonIgnore]
         public virtual Warehouse? Warehouse { get; set; }
 
+        [DisplayName("ИД комплектующего")]
         public int ComponentId { get; set; }
 
-        [JsonIgnore]
+        [DisplayName("Комплектующее"), JsonIgnore]
         public virtual Component? Component { get; set; }
     }
 }

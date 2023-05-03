@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
@@ -9,17 +10,19 @@ namespace HardwareStoreWeb.Models
     {
         public int Id { get; set; }
 
+        [DisplayName("ИД типа характеристики")]
         public int DetailTypeId { get; set; }
 
-        [JsonIgnore]
-        public virtual DetailType? DetailType { get; set; }
+		[DisplayName("Тип характеристики"), JsonIgnore]
+		public virtual DetailType? DetailType { get; set; }
 
+        [DisplayName("ИД комплектующего")]
         public int ComponentId { get; set; }
 
-        [JsonIgnore]
+        [DisplayName("Комплектующее"), JsonIgnore]
         public virtual Component? Component { get; set; }
 
-        [StringLength(128)]
+        [DisplayName("Значение"), StringLength(128)]
         public required string Value { get; set; }
     }
 }

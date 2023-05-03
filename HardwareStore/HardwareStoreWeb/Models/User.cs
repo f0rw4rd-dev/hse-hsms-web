@@ -25,9 +25,17 @@ namespace HardwareStoreWeb.Models
     public class User
     {
         public int Id { get; set; }
+
+        [DisplayName("Пароль")]
         public required string Password { get; set; }
+
+        [DisplayName("Дата регистрации")]
         public long RegistrationDate { get; set; }
+
+        [DisplayName("Дата последнего входа")]
         public long? LastVisitDate { get; set; }
+
+        [DisplayName("Группа прав")]
         public Group Group { get; set; }
 
         [NotMapped]
