@@ -1,0 +1,117 @@
+﻿@page
+@model HardwareStoreWeb.Pages.OrderComponents.EditModel
+
+@{
+    ViewData["Title"] = "Редактировать содержимое заказа";
+}
+
+<div class="row mb-3">
+    <div class="col d-flex d-sm-flex d-md-flex align-items-center align-items-sm-center align-items-md-center justify-content-xl-start col-auto">
+        <h3 class="text-dark mb-0">Содержимое заказов</h3>
+    </div>
+</div>
+<div class="card shadow">
+    <div class="card-header py-3">
+        <p class="text-dark m-0 fw-bold">Изменить содержимое заказа [@Html.DisplayFor(model => model.OrderComponent.Id)]</p>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="OrderComponent.Id" />
+            <div class="form-group my-2">
+                <label asp-for="OrderComponent.Price" class="control-label"></label>
+                <input asp-for="OrderComponent.Price" class="form-control" />
+                <span asp-validation-for="OrderComponent.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group my-2">
+                <label asp-for="OrderComponent.Amount" class="control-label"></label>
+                <input asp-for="OrderComponent.Amount" class="form-control" />
+                <span asp-validation-for="OrderComponent.Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group my-2">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="OrderComponent.IsPartOfConfiguration" /> @Html.DisplayNameFor(model => model.OrderComponent.IsPartOfConfiguration)
+                </label>
+            </div>
+            <div class="form-group my-2">
+                <label asp-for="OrderComponent.OrderId" class="control-label"></label>
+                <input asp-for="OrderComponent.OrderId" class="form-control" />
+                <span asp-validation-for="OrderComponent.OrderId" class="text-danger"></span>
+            </div>
+            <div class="form-group my-2">
+                <label asp-for="OrderComponent.WarehouseId" class="control-label"></label>
+                <input asp-for="OrderComponent.WarehouseId" class="form-control" />
+                <span asp-validation-for="OrderComponent.WarehouseId" class="text-danger"></span>
+            </div>
+            <div class="form-group my-2">
+                <label asp-for="OrderComponent.ComponentId" class="control-label"></label>
+                <input asp-for="OrderComponent.ComponentId" class="form-control" />
+                <span asp-validation-for="OrderComponent.ComponentId" class="text-danger"></span>
+            </div>
+            <div class="col d-lg-flex d-xl-flex d-xxl-flex justify-content-lg-start justify-content-xl-start justify-content-xxl-start me-0 my-2">
+                <div>
+                    <button type="submit" class="btn btn-dark btn-sm me-2 my-1">
+                        <i class="fas fa-pencil-alt fa-sm text-white-50"></i>&nbsp; Изменить
+                    </button>
+                    <a class="btn btn-dark btn-sm me-2 my-1" role="button" asp-page="./Index">
+                        <i class="fas fa-arrow-left fa-sm text-white-50"></i>&nbsp; Вернуться
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@*<h1>Edit</h1>
+
+<h4>OrderComponent</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="OrderComponent.Id" />
+            <div class="form-group">
+                <label asp-for="OrderComponent.Price" class="control-label"></label>
+                <input asp-for="OrderComponent.Price" class="form-control" />
+                <span asp-validation-for="OrderComponent.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderComponent.Amount" class="control-label"></label>
+                <input asp-for="OrderComponent.Amount" class="form-control" />
+                <span asp-validation-for="OrderComponent.Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="OrderComponent.IsPartOfConfiguration" /> @Html.DisplayNameFor(model => model.OrderComponent.IsPartOfConfiguration)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderComponent.OrderId" class="control-label"></label>
+                <select asp-for="OrderComponent.OrderId" class="form-control" asp-items="ViewBag.OrderId"></select>
+                <span asp-validation-for="OrderComponent.OrderId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderComponent.WarehouseId" class="control-label"></label>
+                <select asp-for="OrderComponent.WarehouseId" class="form-control" asp-items="ViewBag.WarehouseId"></select>
+                <span asp-validation-for="OrderComponent.WarehouseId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderComponent.ComponentId" class="control-label"></label>
+                <select asp-for="OrderComponent.ComponentId" class="form-control" asp-items="ViewBag.ComponentId"></select>
+                <span asp-validation-for="OrderComponent.ComponentId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>*@
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

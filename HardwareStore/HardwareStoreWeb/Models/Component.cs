@@ -9,7 +9,8 @@ namespace HardwareStoreWeb.Models
 {
     public class Component
     {
-        public int Id { get; set; }
+		[DisplayName("ИД")]
+		public int Id { get; set; }
 
         [DisplayName("ИД категории")]
         public int ComponentTypeId { get; set; }

@@ -20,7 +20,7 @@ namespace HardwareStoreWeb.Pages.ComponentDetails
         }
 
         [BindProperty]
-      public ComponentDetail ComponentDetail { get; set; } = default!;
+        public ComponentDetail ComponentDetail { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -35,7 +35,7 @@ namespace HardwareStoreWeb.Pages.ComponentDetails
             {
                 return NotFound();
             }
-            else 
+            else
             {
                 ComponentDetail = componentdetail;
             }

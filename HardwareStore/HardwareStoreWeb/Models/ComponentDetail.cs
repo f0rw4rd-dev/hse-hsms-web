@@ -8,7 +8,8 @@ namespace HardwareStoreWeb.Models
     [Index(nameof(DetailTypeId), nameof(ComponentId), IsUnique = true)]
     public class ComponentDetail
     {
-        public int Id { get; set; }
+		[DisplayName("ИД")]
+		public int Id { get; set; }
 
         [DisplayName("ИД типа характеристики")]
         public int DetailTypeId { get; set; }

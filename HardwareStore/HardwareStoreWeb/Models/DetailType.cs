@@ -9,7 +9,8 @@ namespace HardwareStoreWeb.Models
     [Index(nameof(Name), IsUnique = true)]
     public class DetailType
     {
-        public int Id { get; set; }
+		[DisplayName("ИД")]
+		public int Id { get; set; }
 
         [DisplayName("Название"), StringLength(64)]
         public required string Name { get; set; }

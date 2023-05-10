@@ -19,7 +19,7 @@ namespace HardwareStoreWeb.Pages.Components
             _context = context;
         }
 
-      public Component Component { get; set; } = default!; 
+        public Component Component { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -33,7 +33,7 @@ namespace HardwareStoreWeb.Pages.Components
             {
                 return NotFound();
             }
-            else 
+            else
             {
                 Component = component;
             }

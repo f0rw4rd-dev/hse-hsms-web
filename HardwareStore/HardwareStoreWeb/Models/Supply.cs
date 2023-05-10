@@ -7,7 +7,8 @@ namespace HardwareStoreWeb.Models
 {
     public class Supply
     {
-        public int Id { get; set; }
+		[DisplayName("ИД")]
+		public int Id { get; set; }
 
         [DisplayName("Цена поставки (руб)")]
         public float SupplyPrice { get; set; }
@@ -16,20 +17,7 @@ namespace HardwareStoreWeb.Models
         public int Amount { get; set; }
 
         [DisplayName("Дата поставки")]
-        public long Date { get; set; }
-
-        [NotMapped]
-        public DateTime DateHandler
-        {
-            get
-            {
-                return DateTimeHelper.UnixTimeStampToDateTime(Date);
-            }
-            set
-            {
-                Date = DateTimeHelper.DateTimeToUnixTimeStamp(value);
-            }
-        }
+        public DateTime Date { get; set; }
 
         [DisplayName("ИД поставщика")]
         public int SupplierId { get; set; }

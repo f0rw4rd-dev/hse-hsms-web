@@ -51,6 +51,9 @@
 				<thead>
 					<tr>
 						<th>
+							@Html.DisplayNameFor(model => model.Component[0].Id)
+						</th>
+						<th>
 							@Html.DisplayNameFor(model => model.Component[0].ComponentType)
 						</th>
 						<th>
@@ -67,7 +70,10 @@
 					{
 						<tr class="align-middle">
 							<td>
-								@Html.DisplayFor(modelItem => item.ComponentType.Name)
+								@Html.DisplayFor(modelItem => item.Id)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.ComponentType!.Name)
 							</td>
 							<td>
 								@Html.DisplayFor(modelItem => item.Name)
@@ -91,6 +97,9 @@
 				</tbody>
 				<tfoot>
 					<tr>
+						<td>
+							<strong>@Html.DisplayNameFor(model => model.Component[0].Id)</strong>
+						</td>
 						<td>
 							<strong>@Html.DisplayNameFor(model => model.Component[0].ComponentType)</strong>
 						</td>

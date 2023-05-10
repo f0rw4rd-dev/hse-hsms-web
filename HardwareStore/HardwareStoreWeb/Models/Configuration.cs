@@ -7,12 +7,13 @@ namespace HardwareStoreWeb.Models
     [Index(nameof(ConfigurationId), nameof(ComponentId), IsUnique = true)]
     public class Configuration
     {
-        public int Id { get; set; }
+		[DisplayName("ИД")]
+		public int Id { get; set; }
 
         [DisplayName("ИД конфигурации")]
         public int ConfigurationId { get; set; }
 
-        [DisplayName("Количество комплектующего (шт)")]
+        [DisplayName("Количество (шт)")]
         public int Amount { get; set; }
 
         [DisplayName("ИД комплектующего")]

@@ -1,0 +1,66 @@
+﻿@page
+@model HardwareStoreWeb.Pages.Supplies.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Supply[0].SupplyPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Supply[0].Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Supply[0].Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Supply[0].Supplier)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Supply[0].Component)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Supply[0].Warehouse)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Supply) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SupplyPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Supplier.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Component.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Warehouse.Id)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

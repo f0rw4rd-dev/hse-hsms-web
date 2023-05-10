@@ -1,0 +1,78 @@
+﻿@page
+@using HardwareStoreWeb.Models;
+@model HardwareStoreWeb.Pages.Orders.EditModel
+
+@{
+    ViewData["Title"] = "Редактировать заказ";
+}
+
+<div class="row mb-3">
+    <div class="col d-flex d-sm-flex d-md-flex align-items-center align-items-sm-center align-items-md-center justify-content-xl-start col-auto">
+        <h3 class="text-dark mb-0">Комплектующие</h3>
+    </div>
+</div>
+<div class="card shadow">
+    <div class="card-header py-3">
+        <p class="text-dark m-0 fw-bold">Изменить заказ [@Html.DisplayFor(model => model.Order.Id)]</p>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Order.Id" />
+            <div class="form-group my-2">
+                <label asp-for="Order.Date" class="control-label"></label>
+                <input asp-for="Order.Date" class="form-control" />
+                <span asp-validation-for="Order.Date" class="text-danger"></span>
+            </div>
+            <div class="form-group my-2">
+                <label asp-for="Order.Status" class="control-label"></label>
+                <select asp-for="Order.Status" asp-items="Html.GetEnumSelectList<OrderStatus>()" class="form-control"></select>
+                <span asp-validation-for="Order.Status" class="text-danger"></span>
+            </div>
+            <div class="col d-lg-flex d-xl-flex d-xxl-flex justify-content-lg-start justify-content-xl-start justify-content-xxl-start me-0 my-2">
+                <div>
+                    <button type="submit" class="btn btn-dark btn-sm me-2 my-1">
+                        <i class="fas fa-pencil-alt fa-sm text-white-50"></i>&nbsp; Изменить
+                    </button>
+                    <a class="btn btn-dark btn-sm me-2 my-1" role="button" asp-page="./Index">
+                        <i class="fas fa-arrow-left fa-sm text-white-50"></i>&nbsp; Вернуться
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@*<h1>Edit</h1>
+
+<h4>Order</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Order.Id" />
+            <div class="form-group">
+                <label asp-for="Order.Date" class="control-label"></label>
+                <input asp-for="Order.Date" class="form-control" />
+                <span asp-validation-for="Order.Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order.Status" class="control-label"></label>
+                <select asp-for="Order.Status" class="form-control"></select>
+                <span asp-validation-for="Order.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>*@
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

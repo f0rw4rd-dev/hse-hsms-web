@@ -19,7 +19,7 @@ namespace HardwareStoreWeb.Pages.Components
             _context = context;
         }
 
-        public IList<Component> Component { get;set; } = default!;
+        public IList<Component> Component { get; set; } = default!;
 
         public async Task OnGetAsync()
         {

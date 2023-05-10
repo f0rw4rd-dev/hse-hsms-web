@@ -1,5 +1,5 @@
-INSERT INTO public."Users" ("Password", "RegistrationDate", "LastVisitDate", "Group") VALUES ('a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 0, 1677688025, 4);
-INSERT INTO public."Users" ("Password", "RegistrationDate", "LastVisitDate", "Group") VALUES ('a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 1677683262, 1677683283, 3);
+INSERT INTO public."Users" ("Password", "RegistrationDate", "LastVisitDate", "Group") VALUES ('a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', '2023-05-10 11:27:50.115327+05', '2023-05-10 11:27:50.115327+05', 4);
+INSERT INTO public."Users" ("Password", "RegistrationDate", "LastVisitDate", "Group") VALUES ('a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', '2023-05-10 11:27:50.115327+05', '2023-05-10 11:27:50.115327+05', 3);
 
 INSERT INTO public."Suppliers" ("Name") VALUES ('ООО "НВИДИА"');
 INSERT INTO public."Suppliers" ("Name") VALUES ('ООО "Логитек"');
@@ -120,11 +120,11 @@ INSERT INTO public."ComponentDetails" ("DetailTypeId", "ComponentId", "Value") V
 INSERT INTO public."Configurations" ("ConfigurationId", "Amount", "ComponentId") VALUES (1, 1, 1);
 INSERT INTO public."Configurations" ("ConfigurationId", "Amount", "ComponentId") VALUES (1, 1, 2);
 
-INSERT INTO public."Supplies" ("SupplyPrice", "Amount", "Date", "SupplierId", "ComponentId", "WarehouseId") VALUES (15390, 23, 1675327500, 1, 1, 1);
-INSERT INTO public."Supplies" ("SupplyPrice", "Amount", "Date", "SupplierId", "ComponentId", "WarehouseId") VALUES (12380, 19, 1676643300, 2, 1, 1);
-INSERT INTO public."Supplies" ("SupplyPrice", "Amount", "Date", "SupplierId", "ComponentId", "WarehouseId") VALUES (32870, 32, 1675346400, 2, 2, 1);
-INSERT INTO public."Supplies" ("SupplyPrice", "Amount", "Date", "SupplierId", "ComponentId", "WarehouseId") VALUES (33650, 45, 1675296000, 3, 2, 2);
+INSERT INTO public."Supplies" ("SupplyPrice", "Amount", "Date", "SupplierId", "ComponentId", "WarehouseId") VALUES (15390, 23, '2023-05-10 11:27:50.115327+05', 1, 1, 1);
+INSERT INTO public."Supplies" ("SupplyPrice", "Amount", "Date", "SupplierId", "ComponentId", "WarehouseId") VALUES (12380, 19, '2023-05-10 11:27:50.115327+05', 2, 1, 1);
+INSERT INTO public."Supplies" ("SupplyPrice", "Amount", "Date", "SupplierId", "ComponentId", "WarehouseId") VALUES (32870, 32, '2023-05-10 11:27:50.115327+05', 2, 2, 1);
+INSERT INTO public."Supplies" ("SupplyPrice", "Amount", "Date", "SupplierId", "ComponentId", "WarehouseId") VALUES (33650, 45, '2023-05-10 11:27:50.115327+05', 3, 2, 2);
 
-INSERT INTO public."Orders" ("Date", "Status") VALUES (1675900800, 0);
+INSERT INTO public."Orders" ("Date", "Status") VALUES ('2023-05-10 11:27:50.115327+05', 0);
 
 INSERT INTO public."OrderComponents" ("Price", "Amount", "IsPartOfConfiguration", "OrderId", "WarehouseId", "ComponentId") VALUES (13890, 2, false, 1, 1, 1);

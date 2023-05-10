@@ -12,7 +12,7 @@
 </div>
 <div class="card shadow">
 	<div class="card-header py-3">
-        <p class="text-dark m-0 fw-bold">Информация о комплектующем #@Html.DisplayFor(model => model.Component.Id)</p>
+        <p class="text-dark m-0 fw-bold">Информация о комплектующем [@Html.DisplayFor(model => model.Component.Id)]</p>
 	</div>
 	<div class="card-body">
         <dl class="row mb-0">
@@ -37,7 +37,7 @@
         </dl>
         <div class="col d-lg-flex d-xl-flex d-xxl-flex justify-content-lg-start justify-content-xl-start justify-content-xxl-start me-0">
             <div>
-                <a class="btn btn-dark btn-sm me-2 my-1" role="button" asp-page="./Edit" asp-route-id="@Model.Component?.Id">
+                <a class="btn btn-dark btn-sm me-2 my-1" role="button" asp-page="./Edit" asp-route-id="@Model.Component.Id">
                     <i class="fas fa-pencil-alt fa-sm text-white-50"></i>&nbsp; Изменить
                 </a>
                 <a class="btn btn-dark btn-sm me-2 my-1" role="button" asp-page="./Index">

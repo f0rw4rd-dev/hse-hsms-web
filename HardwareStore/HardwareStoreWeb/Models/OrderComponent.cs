@@ -5,7 +5,8 @@ namespace HardwareStoreWeb.Models
 {
     public class OrderComponent
     {
-        public int Id { get; set; }
+		[DisplayName("ИД")]
+		public int Id { get; set; }
 
         [DisplayName("Цена (руб)")]
         public float Price { get; set; }

@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace HardwareStoreWeb.Models
@@ -9,7 +10,8 @@ namespace HardwareStoreWeb.Models
     [Index(nameof(City), nameof(Street), nameof(House), IsUnique = true)]
     public class Warehouse
     {
-        public int Id { get; set; }
+		[DisplayName("ИД")]
+		public int Id { get; set; }
 
         [DisplayName("Город"), StringLength(64)]
         public required string City { get; set; }
@@ -22,6 +24,15 @@ namespace HardwareStoreWeb.Models
 
         [DisplayName("Индекс")]
         public int Zip { get; set; }
+
+        [NotMapped]
+        public string Address 
+        { 
+            get
+            {
+                return $"{City}, {Street}, {House}";
+            } 
+        }
 
         [JsonIgnore]
         public virtual ICollection<ComponentStorage> ComponentStorages { get; private set; } = new ObservableCollection<ComponentStorage>();
