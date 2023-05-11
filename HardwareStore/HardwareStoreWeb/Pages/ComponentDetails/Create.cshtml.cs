@@ -38,6 +38,13 @@ namespace HardwareStoreWeb.Pages.ComponentDetails
                 return Page();
             }
 
+            var component = await _context.Components.FindAsync(ComponentDetail.Id);
+            if (component == null)
+            {
+                ViewData["ErrorMessage"] = "Комплектующего с данным ИД не существует!";
+                return OnGet();
+			}
+
             _context.ComponentDetails.Add(ComponentDetail);
             await _context.SaveChangesAsync();
 

@@ -2,10 +2,71 @@
 @model HardwareStoreWeb.Pages.Supplies.DetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Поставка";
 }
 
-<h1>Details</h1>
+<div class="row mb-3">
+    <div class="col d-flex d-sm-flex d-md-flex align-items-center align-items-sm-center align-items-md-center justify-content-xl-start col-auto">
+        <h3 class="text-dark mb-0">Поставки</h3>
+    </div>
+</div>
+<div class="card shadow">
+    <div class="card-header py-3">
+        <p class="text-dark m-0 fw-bold">Информация о поставке [@Html.DisplayFor(model => model.Supply.Id)]</p>
+    </div>
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Supply.SupplyPrice)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Supply.SupplyPrice)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Supply.Amount)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Supply.Amount)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Supply.Date)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Supply.Date)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Supply.Supplier)
+            </dt>
+            <dd class="col-sm-10">
+                [@Html.DisplayFor(model => model.Supply.SupplierId)] @Html.DisplayFor(model => model.Supply.Supplier!.Name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Supply.Component)
+            </dt>
+            <dd class="col-sm-10">
+                [@Html.DisplayNameFor(model => model.Supply.ComponentId)] @Html.DisplayNameFor(model => model.Supply.Component!.Name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Supply.Warehouse)
+            </dt>
+            <dd class="col-sm-10">
+                [@Html.DisplayFor(model => model.Supply.WarehouseId)] @Html.DisplayFor(model => model.Supply.Warehouse!.Address)
+            </dd>
+        </dl>
+        <div class="col d-lg-flex d-xl-flex d-xxl-flex justify-content-lg-start justify-content-xl-start justify-content-xxl-start me-0">
+            <div>
+                <a class="btn btn-dark btn-sm me-2 my-1" role="button" asp-page="./Edit" asp-route-id="@Model.Supply.Id">
+                    <i class="fas fa-pencil-alt fa-sm text-white-50"></i>&nbsp; Изменить
+                </a>
+                <a class="btn btn-dark btn-sm me-2 my-1" role="button" asp-page="./Index">
+                    <i class="fas fa-arrow-left fa-sm text-white-50"></i>&nbsp; Вернуться
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<h1>Details</h1>
 
 <div>
     <h4>Supply</h4>
@@ -52,4 +113,4 @@
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.Supply?.Id">Edit</a> |
     <a asp-page="./Index">Back to List</a>
-</div>
+</div>*@

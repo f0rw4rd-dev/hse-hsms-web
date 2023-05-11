@@ -16,16 +16,12 @@
     </div>
     <div class="card-body">
         <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group my-2">
                 <label asp-for="ComponentDetail.DetailTypeId" class="control-label"></label>
                 <select asp-for="ComponentDetail.DetailTypeId" class="form-control" asp-items="ViewBag.DetailTypeId"></select>
-@*                <label asp-for="ComponentDetail.DetailTypeId" class="control-label"></label>
-                <input asp-for="ComponentDetail.DetailTypeId" class="form-control" />
-                <span asp-validation-for="ComponentDetail.DetailTypeId" class="text-danger"></span>*@
             </div>
             <div class="form-group my-2">
-@*                <label asp-for="ComponentDetail.ComponentId" class="control-label"></label>
-                <select asp-for="ComponentDetail.ComponentId" class="form-control" asp-items="ViewBag.ComponentId"></select>*@
                 <label asp-for="ComponentDetail.ComponentId" class="control-label"></label>
                 <input asp-for="ComponentDetail.ComponentId" class="form-control" />
                 <span asp-validation-for="ComponentDetail.ComponentId" class="text-danger"></span>

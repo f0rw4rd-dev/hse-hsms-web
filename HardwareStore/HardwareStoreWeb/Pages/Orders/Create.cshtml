@@ -17,6 +17,7 @@
     </div>
     <div class="card-body">
         <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group my-2">
                 <label asp-for="Order.Date" class="control-label"></label>
                 <input asp-for="Order.Date" class="form-control" />
