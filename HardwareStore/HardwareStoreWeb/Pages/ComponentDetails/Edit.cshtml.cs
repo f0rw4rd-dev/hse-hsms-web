@@ -47,7 +47,14 @@ namespace HardwareStoreWeb.Pages.ComponentDetails
         {
             if (!ModelState.IsValid)
             {
-                return Page();
+                return await OnGetAsync(ComponentDetail.Id);
+            }
+
+            var component = await _context.Components.FindAsync(ComponentDetail.ComponentId);
+            if (component == null)
+            {
+                ViewData["ErrorMessage"] = "Комплектующее с данным ИД не существует!";
+                return await OnGetAsync(ComponentDetail.Id);
             }
 
             _context.Attach(ComponentDetail).State = EntityState.Modified;

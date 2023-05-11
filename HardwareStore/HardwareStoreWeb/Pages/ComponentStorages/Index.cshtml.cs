@@ -10,25 +10,27 @@ using HardwareStoreWeb.Models;
 
 namespace HardwareStoreWeb.Pages.ComponentStorages
 {
-	public class IndexModel : PageModel
-	{
-		private readonly HardwareStoreWeb.StoreContext _context;
+    public class IndexModel : PageModel
+    {
+        private readonly HardwareStoreWeb.StoreContext _context;
 
-		public IndexModel(HardwareStoreWeb.StoreContext context)
-		{
-			_context = context;
-		}
+        public IndexModel(HardwareStoreWeb.StoreContext context)
+        {
+            _context = context;
+        }
 
-		public IList<ComponentStorage> ComponentStorage { get; set; } = default!;
+        public IList<ComponentStorage> ComponentStorage { get; set; } = default!;
 
-		public async Task OnGetAsync()
-		{
-			if (_context.ComponentStorages != null)
-			{
-				ComponentStorage = await _context.ComponentStorages
-				.Include(c => c.Component)
-				.Include(c => c.Warehouse).ToListAsync();
-			}
-		}
-	}
+        public async Task OnGetAsync()
+        {
+            if (_context.ComponentStorages != null)
+            {
+                ComponentStorage = await _context.ComponentStorages
+                    .OrderBy(x => x.WarehouseId)
+                    .ThenBy(x => x.ComponentId)
+                    .Include(c => c.Component)
+                    .Include(c => c.Warehouse).ToListAsync();
+            }
+        }
+    }
 }

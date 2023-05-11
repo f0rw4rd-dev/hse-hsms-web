@@ -26,9 +26,12 @@ namespace HardwareStoreWeb.Pages.OrderComponents
 			if (_context.OrderComponents != null)
 			{
 				OrderComponent = await _context.OrderComponents
-				.Include(o => o.Component)
-				.Include(o => o.Order)
-				.Include(o => o.Warehouse).ToListAsync();
+					.OrderBy(x => x.OrderId)
+					.ThenBy(x => x.WarehouseId)
+					.ThenBy(x => x.ComponentId)
+					.Include(o => o.Component)
+					.Include(o => o.Order)
+					.Include(o => o.Warehouse).ToListAsync();
 			}
 		}
 	}

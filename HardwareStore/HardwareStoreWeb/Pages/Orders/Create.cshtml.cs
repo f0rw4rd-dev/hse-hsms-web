@@ -33,7 +33,7 @@ namespace HardwareStoreWeb.Pages.Orders
 		{
 			if (!ModelState.IsValid || _context.Orders == null || Order == null)
 			{
-				return Page();
+				return OnGet();
 			}
 
 			_context.Orders.Add(Order);

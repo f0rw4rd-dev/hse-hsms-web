@@ -17,6 +17,12 @@
     <div class="card-body">
         <dl class="row mb-0">
             <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.User.Id)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.User.Id)
+            </dd>
+            <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.User.RegistrationDate)
             </dt>
             <dd class="col-sm-10">

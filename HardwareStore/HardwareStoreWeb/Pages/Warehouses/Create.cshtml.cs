@@ -33,7 +33,7 @@ namespace HardwareStoreWeb.Pages.Warehouses
 		{
 			if (!ModelState.IsValid || _context.Warehouses == null || Warehouse == null)
 			{
-				return Page();
+				return OnGet();
 			}
 
 			_context.Warehouses.Add(Warehouse);

@@ -26,8 +26,10 @@ namespace HardwareStoreWeb.Pages.ComponentDetails
             if (_context.ComponentDetails != null)
             {
                 ComponentDetail = await _context.ComponentDetails
-                .Include(c => c.Component)
-                .Include(c => c.DetailType).ToListAsync();
+                    .OrderBy(x => x.ComponentId)
+                    .ThenBy(x => x.DetailTypeId)
+                    .Include(c => c.Component)
+                    .Include(c => c.DetailType).ToListAsync();
             }
         }
     }

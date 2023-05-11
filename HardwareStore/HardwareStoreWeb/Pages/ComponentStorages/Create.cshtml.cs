@@ -35,10 +35,24 @@ namespace HardwareStoreWeb.Pages.ComponentStorages
 		{
 			if (!ModelState.IsValid || _context.ComponentStorages == null || ComponentStorage == null)
 			{
-				return Page();
+				return OnGet();
 			}
 
-			_context.ComponentStorages.Add(ComponentStorage);
+			var warehouse = await _context.Warehouses.FindAsync(ComponentStorage.WarehouseId);
+			if (warehouse == null)
+			{
+				ViewData["ErrorMessage"] = "Склад с данным ИД не существует!";
+                return OnGet();
+            }
+
+            var component = await _context.Components.FindAsync(ComponentStorage.ComponentId);
+            if (component == null)
+            {
+                ViewData["ErrorMessage"] = "Комплектующее с данным ИД не существует!";
+				return OnGet();
+            }
+
+            _context.ComponentStorages.Add(ComponentStorage);
 			await _context.SaveChangesAsync();
 
 			return RedirectToPage("./Index");

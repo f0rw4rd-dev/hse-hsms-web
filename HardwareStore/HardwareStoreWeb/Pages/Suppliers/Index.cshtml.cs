@@ -25,7 +25,7 @@ namespace HardwareStoreWeb.Pages.Suppliers
 		{
 			if (_context.Suppliers != null)
 			{
-				Supplier = await _context.Suppliers.ToListAsync();
+				Supplier = await _context.Suppliers.OrderBy(x => x.Id).ToListAsync();
 			}
 		}
 	}

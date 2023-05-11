@@ -24,9 +24,11 @@ namespace HardwareStoreWeb.Pages.Components
         public async Task OnGetAsync()
         {
             if (_context.Components != null)
+
             {
                 Component = await _context.Components
-                .Include(c => c.ComponentType).ToListAsync();
+                    .OrderBy(x => x.Id)
+                    .Include(c => c.ComponentType).ToListAsync();
             }
         }
     }

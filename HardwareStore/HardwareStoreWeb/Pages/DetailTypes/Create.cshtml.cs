@@ -33,7 +33,7 @@ namespace HardwareStoreWeb.Pages.DetailTypes
 		{
 			if (!ModelState.IsValid || _context.DetailTypes == null || DetailType == null)
 			{
-				return Page();
+				return OnGet();
 			}
 
 			_context.DetailTypes.Add(DetailType);

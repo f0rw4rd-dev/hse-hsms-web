@@ -45,7 +45,7 @@ namespace HardwareStoreWeb.Pages.Warehouses
 		{
 			if (!ModelState.IsValid)
 			{
-				return Page();
+				return await OnGetAsync(Warehouse.Id);
 			}
 
 			_context.Attach(Warehouse).State = EntityState.Modified;

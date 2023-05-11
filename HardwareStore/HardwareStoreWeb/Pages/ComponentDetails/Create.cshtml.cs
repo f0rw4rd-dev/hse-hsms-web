@@ -35,13 +35,13 @@ namespace HardwareStoreWeb.Pages.ComponentDetails
         {
             if (!ModelState.IsValid || _context.ComponentDetails == null || ComponentDetail == null)
             {
-                return Page();
+                return OnGet();
             }
 
             var component = await _context.Components.FindAsync(ComponentDetail.Id);
             if (component == null)
             {
-                ViewData["ErrorMessage"] = "Комплектующего с данным ИД не существует!";
+                ViewData["ErrorMessage"] = "Комплектующее с данным ИД не существует!";
                 return OnGet();
 			}
 

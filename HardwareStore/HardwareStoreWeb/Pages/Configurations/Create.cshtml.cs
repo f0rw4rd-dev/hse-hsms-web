@@ -34,10 +34,17 @@ namespace HardwareStoreWeb.Pages.Configurations
 		{
 			if (!ModelState.IsValid || _context.Configurations == null || Configuration == null)
 			{
-				return Page();
+				return OnGet();
 			}
 
-			_context.Configurations.Add(Configuration);
+            var component = await _context.Warehouses.FindAsync(Configuration.ComponentId);
+            if (component == null)
+            {
+                ViewData["ErrorMessage"] = "Комплектующее с данным ИД не существует!";
+                return OnGet();
+            }
+
+            _context.Configurations.Add(Configuration);
 			await _context.SaveChangesAsync();
 
 			return RedirectToPage("./Index");

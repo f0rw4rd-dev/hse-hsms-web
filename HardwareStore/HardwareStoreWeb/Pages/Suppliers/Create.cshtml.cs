@@ -33,7 +33,7 @@ namespace HardwareStoreWeb.Pages.Suppliers
 		{
 			if (!ModelState.IsValid || _context.Suppliers == null || Supplier == null)
 			{
-				return Page();
+				return OnGet();
 			}
 
 			_context.Suppliers.Add(Supplier);

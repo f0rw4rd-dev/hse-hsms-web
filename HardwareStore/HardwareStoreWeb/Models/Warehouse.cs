@@ -13,17 +13,25 @@ namespace HardwareStoreWeb.Models
 		[DisplayName("ИД")]
 		public int Id { get; set; }
 
-        [DisplayName("Город"), StringLength(64)]
+        [DisplayName("Город")]
+        [StringLength(64, ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "StringLength")]
+        [Required(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "Required")]
         public required string City { get; set; }
 
-        [DisplayName("Улица"), StringLength(64)]
+        [DisplayName("Улица")]
+        [StringLength(64, ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "StringLength")]
+        [Required(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "Required")]
         public required string Street { get; set; }
 
-        [DisplayName("Дом"), StringLength(8)]
+        [DisplayName("Дом")]
+        [StringLength(8, ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "StringLength")]
+        [Required(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "Required")]
         public required string House { get; set; }
 
         [DisplayName("Индекс")]
-        public int Zip { get; set; }
+        [StringLength(8, ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "StringLength")]
+        [Required(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "Required")]
+        public required string Zip { get; set; }
 
         [NotMapped]
         public string Address 

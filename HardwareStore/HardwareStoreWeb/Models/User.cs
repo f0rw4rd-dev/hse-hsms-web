@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel;
 using HardwareStoreWeb.Utilities;
+using System.ComponentModel.DataAnnotations;
 
 namespace HardwareStoreWeb.Models
 {
@@ -28,12 +29,16 @@ namespace HardwareStoreWeb.Models
 		public int Id { get; set; }
 
         [DisplayName("Пароль")]
+        [StringLength(64, ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "StringLength")]
+        [Required(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "Required")]
         public required string Password { get; set; }
 
         [DisplayName("Дата регистрации")]
+        [Required(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "Required")]
         public DateTime RegistrationDate { get; set; }
 
         [DisplayName("Дата последнего входа")]
+        [Required(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "Required")]
         public DateTime? LastVisitDate { get; set; }
 
         [DisplayName("Группа прав")]

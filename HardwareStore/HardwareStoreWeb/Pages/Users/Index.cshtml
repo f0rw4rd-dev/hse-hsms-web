@@ -28,7 +28,7 @@
 		<p class="text-dark m-0 fw-bold">Информация о всех пользователях</p>
 	</div>
 	<div class="card-body">
-		<div class="row">
+@*		<div class="row">
 			<div class="col-md-6 text-nowrap">
 				<div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
 					<label class="form-label">
@@ -45,91 +45,98 @@
 			<div class="col-md-6">
 				<div class="text-md-end dataTables_filter" id="dataTable_filter"><label class="form-label"><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Поиск..."></label></div>
 			</div>
-		</div>
-		<div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-			<table class="table my-0" id="dataTable">
-				<thead>
-					<tr>
-						<th>
-							@Html.DisplayNameFor(model => model.User[0].Id)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.User[0].RegistrationDate)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.User[0].LastVisitDate)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.User[0].Group)
-						</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					@foreach (var item in Model.User)
-					{
-						<tr class="align-middle">
-							<td>
-								@Html.DisplayFor(modelItem => item.Id)
-							</td>
-							<td>
-								@Html.DisplayFor(modelItem => item.RegistrationDate)
-							</td>
-							<td>
-								@Html.DisplayFor(modelItem => item.LastVisitDate)
-							</td>
-							<td>
-								@Html.DisplayFor(modelItem => item.Group)
-							</td>
-							<td>
-								<a class="btn btn-dark btn-sm me-2 my-1" role="button" asp-page="./Edit" asp-route-id="@item.Id">
-									<i class="fas fa-pencil-alt fa-sm text-white-50"></i>&nbsp; Изменить
-								</a>
-								<a class="btn btn-dark btn-sm me-2 my-1" role="button" asp-page="./Details" asp-route-id="@item.Id">
-									<i class="fas fa-info fa-sm text-white-50"></i>&nbsp; Просмотреть
-								</a>
-								<a class="btn btn-dark btn-sm me-2 my-1" role="button" asp-page="./Delete" asp-route-id="@item.Id">
-									<i class="fas fa-trash-alt fa-sm text-white-50"></i>&nbsp; Удалить
-								</a>
-							</td>
+		</div>*@
+		@if (Model.User.Any())
+		{
+			<div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+				<table class="table my-0" id="dataTable">
+					<thead>
+						<tr>
+							<th>
+								@Html.DisplayNameFor(model => model.User[0].Id)
+							</th>
+							<th>
+								@Html.DisplayNameFor(model => model.User[0].RegistrationDate)
+							</th>
+							<th>
+								@Html.DisplayNameFor(model => model.User[0].LastVisitDate)
+							</th>
+							<th>
+								@Html.DisplayNameFor(model => model.User[0].Group)
+							</th>
+							<th></th>
 						</tr>
-					}
-				</tbody>
-				<tfoot>
-					<tr>
-						<td>
-							<strong>@Html.DisplayNameFor(model => model.User[0].Id)</strong>
-						</td>
-						<td>
-							<strong>@Html.DisplayNameFor(model => model.User[0].RegistrationDate)</strong>
-						</td>
-						<td>
-							<strong>@Html.DisplayNameFor(model => model.User[0].LastVisitDate)</strong>
-						</td>
-						<td>
-							<strong>@Html.DisplayNameFor(model => model.User[0].Group)</strong>
-						</td>
-						<td></td>
-					</tr>
-				</tfoot>
-			</table>
-		</div>
-		<div class="row">
-			<div class="col-md-6 align-self-center">
-				<p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Показано от 1 до 10 из 27</p>
+					</thead>
+					<tbody>
+						@foreach (var item in Model.User)
+						{
+							<tr class="align-middle">
+								<td>
+									@Html.DisplayFor(modelItem => item.Id)
+								</td>
+								<td>
+									@Html.DisplayFor(modelItem => item.RegistrationDate)
+								</td>
+								<td>
+									@Html.DisplayFor(modelItem => item.LastVisitDate)
+								</td>
+								<td>
+									@Html.DisplayFor(modelItem => item.Group)
+								</td>
+								<td>
+									<a class="btn btn-dark btn-sm me-2 my-1" role="button" asp-page="./Edit" asp-route-id="@item.Id">
+										<i class="fas fa-pencil-alt fa-sm text-white-50"></i>&nbsp; Изменить
+									</a>
+									<a class="btn btn-dark btn-sm me-2 my-1" role="button" asp-page="./Details" asp-route-id="@item.Id">
+										<i class="fas fa-info fa-sm text-white-50"></i>&nbsp; Открыть
+									</a>
+									<a class="btn btn-dark btn-sm me-2 my-1" role="button" asp-page="./Delete" asp-route-id="@item.Id">
+										<i class="fas fa-trash-alt fa-sm text-white-50"></i>&nbsp; Удалить
+									</a>
+								</td>
+							</tr>
+						}
+					</tbody>
+					<tfoot>
+						<tr>
+							<td>
+								<strong>@Html.DisplayNameFor(model => model.User[0].Id)</strong>
+							</td>
+							<td>
+								<strong>@Html.DisplayNameFor(model => model.User[0].RegistrationDate)</strong>
+							</td>
+							<td>
+								<strong>@Html.DisplayNameFor(model => model.User[0].LastVisitDate)</strong>
+							</td>
+							<td>
+								<strong>@Html.DisplayNameFor(model => model.User[0].Group)</strong>
+							</td>
+							<td></td>
+						</tr>
+					</tfoot>
+				</table>
 			</div>
-			<div class="col-md-6">
-				<nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
-					<ul class="pagination">
-						<li class="page-item disabled"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
-					</ul>
-				</nav>
+			<div class="row">
+				<div class="col-md-6 align-self-center">
+					<p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Показано от 1 до 10 из 27</p>
+				</div>
+				<div class="col-md-6">
+					<nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+						<ul class="pagination">
+							<li class="page-item disabled"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
+							<li class="page-item"><a class="page-link" href="#">1</a></li>
+							<li class="page-item"><a class="page-link" href="#">2</a></li>
+							<li class="page-item"><a class="page-link" href="#">3</a></li>
+							<li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
+						</ul>
+					</nav>
+				</div>
 			</div>
-		</div>
+		}
+		else
+		{
+			<p>Пользователи не найдены.</p>
+		}
 	</div>
 </div>
 

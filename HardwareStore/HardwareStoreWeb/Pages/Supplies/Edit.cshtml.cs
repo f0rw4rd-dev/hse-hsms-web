@@ -48,10 +48,31 @@ namespace HardwareStoreWeb.Pages.Supplies
 		{
 			if (!ModelState.IsValid)
 			{
-				return Page();
+				return await OnGetAsync(Supply.Id);
 			}
 
-			_context.Attach(Supply).State = EntityState.Modified;
+            var component = await _context.Warehouses.FindAsync(Supply.ComponentId);
+            if (component == null)
+            {
+                ViewData["ErrorMessage"] = "Комплектующее с данным ИД не существует!";
+                return await OnGetAsync(Supply.Id);
+            }
+
+            var order = await _context.Warehouses.FindAsync(Supply.SupplierId);
+            if (order == null)
+            {
+                ViewData["ErrorMessage"] = "Поставщика с данным ИД не существует!";
+                return await OnGetAsync(Supply.Id);
+            }
+
+            var warehouse = await _context.Warehouses.FindAsync(Supply.WarehouseId);
+            if (warehouse == null)
+            {
+                ViewData["ErrorMessage"] = "Склад с данным ИД не существует!";
+                return await OnGetAsync(Supply.Id);
+            }
+
+            _context.Attach(Supply).State = EntityState.Modified;
 
 			try
 			{

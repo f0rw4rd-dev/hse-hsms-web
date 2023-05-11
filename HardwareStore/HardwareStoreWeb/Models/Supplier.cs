@@ -12,7 +12,9 @@ namespace HardwareStoreWeb.Models
 		[DisplayName("ИД")]
 		public int Id { get; set; }
 
-        [DisplayName("Название"), StringLength(128)]
+        [DisplayName("Название")]
+        [StringLength(128, ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "StringLength")]
+        [Required(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "Required")]
         public required string Name { get; set; }
 
         [JsonIgnore]

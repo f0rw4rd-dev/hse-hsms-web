@@ -2,7 +2,7 @@
 @model HardwareStoreWeb.Pages.ComponentTypes.DetailsModel
 
 @{
-    ViewData["Title"] = "Категория комплектующего";
+    ViewData["Title"] = "Категория комплектующих";
 }
 
 <div class="row mb-3">
@@ -29,7 +29,7 @@
                 @Html.DisplayFor(model => model.ComponentType.Name)
             </dd>
         </dl>
-        <div class="col d-lg-flex d-xl-flex d-xxl-flex justify-content-lg-start justify-content-xl-start justify-content-xxl-start me-0">
+        <div class="col d-lg-flex d-xl-flex d-xxl-flex justify-content-lg-start justify-content-xl-start justify-content-xxl-start me-0 my-2">
             <div>
                 <a class="btn btn-dark btn-sm me-2 my-1" role="button" asp-page="./Edit" asp-route-id="@Model.ComponentType.Id">
                     <i class="fas fa-pencil-alt fa-sm text-white-50"></i>&nbsp; Изменить

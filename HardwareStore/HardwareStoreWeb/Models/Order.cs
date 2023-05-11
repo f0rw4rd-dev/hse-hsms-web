@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel;
 using HardwareStoreWeb.Utilities;
 using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations;
 
 namespace HardwareStoreWeb.Models
 {
@@ -26,6 +27,7 @@ namespace HardwareStoreWeb.Models
 		public int Id { get; set; }
 
         [DisplayName("Дата заказа")]
+        [Required(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "Required")]
         public DateTime Date { get; set; }
 
         [DisplayName("Статус")]

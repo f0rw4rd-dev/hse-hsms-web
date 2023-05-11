@@ -34,7 +34,7 @@ namespace HardwareStoreWeb.Pages.Components
         {
             if (!ModelState.IsValid || _context.Components == null || Component == null)
             {
-                return Page();
+                return OnGet();
             }
 
             _context.Components.Add(Component);

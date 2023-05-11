@@ -19,13 +19,13 @@ namespace HardwareStoreWeb.Pages.Users
 			_context = context;
 		}
 
-		public IList<User> User { get; set; } = default!;
+		public new IList<User> User { get; set; } = default!;
 
 		public async Task OnGetAsync()
 		{
 			if (_context.Users != null)
 			{
-				User = await _context.Users.ToListAsync();
+				User = await _context.Users.OrderBy(x => x.Id).ToListAsync();
 			}
 		}
 	}

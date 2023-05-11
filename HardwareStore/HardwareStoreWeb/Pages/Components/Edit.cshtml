@@ -19,7 +19,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Component.Id" />
             <div class="form-group my-2">
-                <label asp-for="Component.ComponentTypeId" class="control-label"></label>
+                <label asp-for="Component.ComponentTypeId" class="control-label">Категория</label>
                 <select asp-for="Component.ComponentTypeId" class="form-control" asp-items="ViewBag.ComponentTypeId"></select>
                 <span asp-validation-for="Component.ComponentTypeId" class="text-danger"></span>
             </div>

@@ -25,7 +25,7 @@ namespace HardwareStoreWeb.Pages.Warehouses
 		{
 			if (_context.Warehouses != null)
 			{
-				Warehouse = await _context.Warehouses.ToListAsync();
+				Warehouse = await _context.Warehouses.OrderBy(x => x.Id).ToListAsync();
 			}
 		}
 	}

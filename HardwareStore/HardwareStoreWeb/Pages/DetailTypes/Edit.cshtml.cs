@@ -45,7 +45,7 @@ namespace HardwareStoreWeb.Pages.DetailTypes
 		{
 			if (!ModelState.IsValid)
 			{
-				return Page();
+				return await OnGetAsync(DetailType.Id);
 			}
 
 			_context.Attach(DetailType).State = EntityState.Modified;

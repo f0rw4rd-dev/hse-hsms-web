@@ -25,7 +25,7 @@ namespace HardwareStoreWeb.Pages.Users
 		}
 
 		[BindProperty]
-		public User User { get; set; } = default!;
+		public new User User { get; set; } = default!;
 
 
 		// To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
@@ -33,7 +33,7 @@ namespace HardwareStoreWeb.Pages.Users
 		{
 			if (!ModelState.IsValid || _context.Users == null || User == null)
 			{
-				return Page();
+				return OnGet();
 			}
 
 			_context.Users.Add(User);

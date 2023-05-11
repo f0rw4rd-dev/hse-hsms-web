@@ -26,7 +26,9 @@ namespace HardwareStoreWeb.Pages.Configurations
 			if (_context.Configurations != null)
 			{
 				Configuration = await _context.Configurations
-				.Include(c => c.Component).ToListAsync();
+					.OrderBy(x => x.ConfigurationId)
+					.ThenBy(x => x.ComponentId)
+					.Include(c => c.Component).ToListAsync();
 			}
 		}
 	}

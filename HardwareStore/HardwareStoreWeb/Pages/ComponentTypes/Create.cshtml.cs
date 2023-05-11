@@ -33,7 +33,7 @@ namespace HardwareStoreWeb.Pages.ComponentTypes
 		{
 			if (!ModelState.IsValid || _context.ComponentTypes == null || ComponentType == null)
 			{
-				return Page();
+				return OnGet();
 			}
 
 			_context.ComponentTypes.Add(ComponentType);

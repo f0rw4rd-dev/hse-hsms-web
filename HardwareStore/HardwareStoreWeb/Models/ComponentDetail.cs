@@ -18,12 +18,15 @@ namespace HardwareStoreWeb.Models
 		public virtual DetailType? DetailType { get; set; }
 
         [DisplayName("ИД комплектующего")]
+        [Required(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "Required")]
         public int ComponentId { get; set; }
 
         [DisplayName("Комплектующее"), JsonIgnore]
         public virtual Component? Component { get; set; }
 
-        [DisplayName("Значение"), StringLength(128)]
+        [DisplayName("Значение")]
+        [StringLength(128, ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "StringLength")]
+        [Required(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "Required")]
         public required string Value { get; set; }
     }
 }

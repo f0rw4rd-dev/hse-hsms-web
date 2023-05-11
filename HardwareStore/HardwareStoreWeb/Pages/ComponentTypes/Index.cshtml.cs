@@ -25,7 +25,7 @@ namespace HardwareStoreWeb.Pages.ComponentTypes
 		{
 			if (_context.ComponentTypes != null)
 			{
-				ComponentType = await _context.ComponentTypes.ToListAsync();
+				ComponentType = await _context.ComponentTypes.OrderBy(x => x.Id).ToListAsync();
 			}
 		}
 	}

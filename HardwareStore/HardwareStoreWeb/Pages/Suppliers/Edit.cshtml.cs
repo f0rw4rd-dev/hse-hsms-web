@@ -45,7 +45,7 @@ namespace HardwareStoreWeb.Pages.Suppliers
 		{
 			if (!ModelState.IsValid)
 			{
-				return Page();
+				return await OnGetAsync(Supplier.Id);
 			}
 
 			_context.Attach(Supplier).State = EntityState.Modified;

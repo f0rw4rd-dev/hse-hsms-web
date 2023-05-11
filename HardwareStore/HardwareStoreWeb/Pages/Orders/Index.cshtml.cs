@@ -25,7 +25,7 @@ namespace HardwareStoreWeb.Pages.Orders
 		{
 			if (_context.Orders != null)
 			{
-				Order = await _context.Orders.ToListAsync();
+				Order = await _context.Orders.OrderBy(x => x.Id).ToListAsync();
 			}
 		}
 	}

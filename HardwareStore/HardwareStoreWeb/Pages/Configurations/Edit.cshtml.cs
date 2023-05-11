@@ -46,10 +46,17 @@ namespace HardwareStoreWeb.Pages.Configurations
 		{
 			if (!ModelState.IsValid)
 			{
-				return Page();
-			}
+				return await OnGetAsync(Configuration.Id);
+            }
 
-			_context.Attach(Configuration).State = EntityState.Modified;
+            var component = await _context.Warehouses.FindAsync(Configuration.ComponentId);
+            if (component == null)
+            {
+                ViewData["ErrorMessage"] = "Комплектующее с данным ИД не существует!";
+                return await OnGetAsync(Configuration.Id);
+            }
+
+            _context.Attach(Configuration).State = EntityState.Modified;
 
 			try
 			{
