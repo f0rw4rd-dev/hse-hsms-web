@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using HardwareStoreWeb;
 using HardwareStoreWeb.Models;
+using HardwareStoreWeb.Utilities;
 
 namespace HardwareStoreWeb.Pages.OrderComponents
 {
@@ -21,7 +22,9 @@ namespace HardwareStoreWeb.Pages.OrderComponents
 
 		public IList<OrderComponent> OrderComponent { get; set; } = default!;
 
-		public async Task OnGetAsync()
+		public Pagination<OrderComponent> Pagination { get; set; } = default!;
+
+		public async Task OnGetAsync([FromQuery] int pageNumber = 1)
 		{
 			if (_context.OrderComponents != null)
 			{
@@ -32,6 +35,12 @@ namespace HardwareStoreWeb.Pages.OrderComponents
 					.Include(o => o.Component)
 					.Include(o => o.Order)
 					.Include(o => o.Warehouse).ToListAsync();
+
+				if (OrderComponent.Any())
+				{
+					Pagination = new Pagination<OrderComponent>(OrderComponent, pageNumber, 20);
+					OrderComponent = Pagination.Items;
+				}
 			}
 		}
 	}

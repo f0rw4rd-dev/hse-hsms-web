@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using HardwareStoreWeb;
 using HardwareStoreWeb.Models;
+using HardwareStoreWeb.Utilities;
 
 namespace HardwareStoreWeb.Pages.Users
 {
@@ -21,11 +22,19 @@ namespace HardwareStoreWeb.Pages.Users
 
 		public new IList<User> User { get; set; } = default!;
 
-		public async Task OnGetAsync()
+		public Pagination<User> Pagination { get; set; } = default!;
+
+		public async Task OnGetAsync([FromQuery] int pageNumber = 1)
 		{
 			if (_context.Users != null)
 			{
 				User = await _context.Users.OrderBy(x => x.Id).ToListAsync();
+
+				if (User.Any())
+				{
+					Pagination = new Pagination<User>(User, pageNumber, 20);
+					User = Pagination.Items;
+				}
 			}
 		}
 	}

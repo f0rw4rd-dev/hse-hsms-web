@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using HardwareStoreWeb;
 using HardwareStoreWeb.Models;
+using HardwareStoreWeb.Utilities;
 
 namespace HardwareStoreWeb.Pages.Suppliers
 {
@@ -21,11 +22,19 @@ namespace HardwareStoreWeb.Pages.Suppliers
 
 		public IList<Supplier> Supplier { get; set; } = default!;
 
-		public async Task OnGetAsync()
+		public Pagination<Supplier> Pagination { get; set; } = default!;
+
+		public async Task OnGetAsync([FromQuery] int pageNumber = 1)
 		{
 			if (_context.Suppliers != null)
 			{
 				Supplier = await _context.Suppliers.OrderBy(x => x.Id).ToListAsync();
+
+				if (Supplier.Any())
+				{
+					Pagination = new Pagination<Supplier>(Supplier, pageNumber, 20);
+					Supplier = Pagination.Items;
+				}
 			}
 		}
 	}

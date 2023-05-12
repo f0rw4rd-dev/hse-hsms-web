@@ -98,19 +98,39 @@
 					</tfoot>
 				</table>
 			</div>
-
 			<div class="row">
 				<div class="col-md-6 align-self-center">
-					<p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Показано от 1 до 10 из 27</p>
+					<p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Показано от @Model.Pagination.StartAt до @Model.Pagination.EndAt из @Model.Pagination.TotalCount</p>
 				</div>
 				<div class="col-md-6">
 					<nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
 						<ul class="pagination">
-							<li class="page-item disabled"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
+							@if (Model.Pagination.TotalPages > 1)
+							{
+								@if (Model.Pagination.HasPreviousPage)
+								{
+									<li class="page-item"><a class="page-link" asp-page="./Index" asp-route-pageNumber="1"><span aria-hidden="true">«</span></a></li>
+									<li class="page-item"><a class="page-link" asp-page="./Index" asp-route-pageNumber="@(Model.Pagination.PageNumber - 1)"><span aria-hidden="true">‹</span></a></li>
+								}
+
+								@for (int i = 0; i < Model.Pagination.GetRange().Count; i++)
+								{
+									@if (Model.Pagination.GetRange()[i] == Model.Pagination.PageNumber)
+									{
+										<li class="page-item disabled"><a class="page-link bg-gray-100" asp-page="./Index" asp-route-pageNumber="@Model.Pagination.GetRange()[i]">@Model.Pagination.GetRange()[i]</a></li>
+									}
+									else
+									{
+										<li class="page-item"><a class="page-link" asp-page="./Index" asp-route-pageNumber="@Model.Pagination.GetRange()[i]">@Model.Pagination.GetRange()[i]</a></li>
+									}
+								}
+
+								@if (Model.Pagination.HasNextPage)
+								{
+									<li class="page-item"><a class="page-link" asp-page="./Index" asp-route-pageNumber="@(Model.Pagination.PageNumber + 1)"><span aria-hidden="true">›</span></a></li>
+									<li class="page-item"><a class="page-link" asp-page="./Index" asp-route-pageNumber="@Model.Pagination.TotalPages"><span aria-hidden="true">»</span></a></li>
+								}
+							}
 						</ul>
 					</nav>
 				</div>

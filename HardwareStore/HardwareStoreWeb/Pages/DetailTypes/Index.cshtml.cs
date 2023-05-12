@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using HardwareStoreWeb;
 using HardwareStoreWeb.Models;
+using HardwareStoreWeb.Utilities;
 
 namespace HardwareStoreWeb.Pages.DetailTypes
 {
@@ -21,11 +22,19 @@ namespace HardwareStoreWeb.Pages.DetailTypes
 
 		public IList<DetailType> DetailType { get; set; } = default!;
 
-		public async Task OnGetAsync()
+		public Pagination<DetailType> Pagination { get; set; } = default!;
+
+		public async Task OnGetAsync([FromQuery] int pageNumber = 1)
 		{
 			if (_context.DetailTypes != null)
 			{
 				DetailType = await _context.DetailTypes.ToListAsync();
+
+				if (DetailType.Any())
+				{
+					Pagination = new Pagination<DetailType>(DetailType, pageNumber, 20);
+					DetailType = Pagination.Items;
+				}
 			}
 		}
 	}
