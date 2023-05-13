@@ -27,7 +27,6 @@ namespace HardwareStoreWeb.Models
         public int OrderId { get; set; }
 
         [DisplayName("Заказ")]
-        [JsonIgnore]
         public virtual Order? Order { get; set; }
 
         [DisplayName("ИД склада")]
@@ -35,14 +34,13 @@ namespace HardwareStoreWeb.Models
         public int WarehouseId { get; set; }
 
         [DisplayName("Склад")]
-        [JsonIgnore]
         public virtual Warehouse? Warehouse { get; set; }
 
         [DisplayName("ИД комплектующего")]
         [Required(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "Required")]
         public int ComponentId { get; set; }
 
-        [DisplayName("Комплектующее"), JsonIgnore]
+        [DisplayName("Комплектующее")]
         public virtual Component? Component { get; set; }
     }
 }

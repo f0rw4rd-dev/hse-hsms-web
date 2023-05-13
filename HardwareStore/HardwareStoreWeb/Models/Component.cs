@@ -17,7 +17,7 @@ namespace HardwareStoreWeb.Models
         [DisplayName("ИД категории")]
         public int ComponentTypeId { get; set; }
 
-        [DisplayName("Категория"), JsonIgnore]
+        [DisplayName("Категория")]
         public virtual ComponentType? ComponentType { get; set; }
 
         [DisplayName("Название")]

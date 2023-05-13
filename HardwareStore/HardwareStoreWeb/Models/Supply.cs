@@ -29,21 +29,21 @@ namespace HardwareStoreWeb.Models
         [Required(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "Required")]
         public int SupplierId { get; set; }
 
-        [DisplayName("Поставщик"), JsonIgnore]
+        [DisplayName("Поставщик")]
         public virtual Supplier? Supplier { get; set; }
 
         [DisplayName("ИД комплектующего")]
         [Required(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "Required")]
         public int ComponentId { get; set; }
 
-        [DisplayName("Комплектующее"), JsonIgnore]
+        [DisplayName("Комплектующее")]
         public virtual Component? Component { get; set; }
 
         [DisplayName("ИД склада")]
         [Required(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "Required")]
         public int WarehouseId { get; set; }
 
-        [DisplayName("Склад"), JsonIgnore]
+        [DisplayName("Склад")]
         public virtual Warehouse? Warehouse { get; set; }
     }
 }

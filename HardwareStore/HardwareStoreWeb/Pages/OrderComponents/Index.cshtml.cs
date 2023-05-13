@@ -8,10 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using HardwareStoreWeb;
 using HardwareStoreWeb.Models;
 using HardwareStoreWeb.Utilities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HardwareStoreWeb.Pages.OrderComponents
 {
-	public class IndexModel : PageModel
+    [Authorize]
+    public class IndexModel : PageModel
 	{
 		private readonly HardwareStoreWeb.StoreContext _context;
 
@@ -42,6 +44,31 @@ namespace HardwareStoreWeb.Pages.OrderComponents
 					OrderComponent = Pagination.Items;
 				}
 			}
+		}
+
+		public async Task<IActionResult> OnPostAsync()
+		{
+			var headerRow = new List<string[]>() { new string[] { "ИД", "ИД заказа", "ИД склада", "ИД комплектующего", "Цена (руб)", "Количество (шт)", "Часть конфигурации" } };
+			var cellData = new List<object[]>() { };
+
+			foreach (var orderComponent in _context.OrderComponents.ToList())
+			{
+				if (orderComponent == null)
+					continue;
+
+				cellData.Add(new object[] 
+				{ 
+					orderComponent.Id, 
+					orderComponent.OrderId, 
+					orderComponent.WarehouseId, 
+					orderComponent.ComponentId, 
+					orderComponent.Price, 
+					orderComponent.Amount, 
+					orderComponent.IsPartOfConfiguration 
+				});
+			}
+
+			return await ExportHelper.ExportToExcel(this, "Содержимое заказов", headerRow, cellData);
 		}
 	}
 }

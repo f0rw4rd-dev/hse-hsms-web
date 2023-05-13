@@ -17,7 +17,6 @@ namespace HardwareStoreWeb.Models
         [Required(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "Required")]
         public required string Name { get; set; }
 
-        [JsonIgnore]
         public virtual ICollection<ComponentDetail> ComponentDetails { get; private set; } = new ObservableCollection<ComponentDetail>();
     }
 }

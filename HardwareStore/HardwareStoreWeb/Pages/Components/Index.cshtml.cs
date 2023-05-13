@@ -10,9 +10,12 @@ using HardwareStoreWeb.Models;
 using HardwareStoreWeb.Utilities;
 using System.Drawing.Printing;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
+using OfficeOpenXml;
 
 namespace HardwareStoreWeb.Pages.Components
 {
+	[Authorize]
 	public class IndexModel : PageModel
 	{
 		private readonly HardwareStoreWeb.StoreContext _context;
@@ -40,6 +43,29 @@ namespace HardwareStoreWeb.Pages.Components
 					Component = Pagination.Items;
 				}
 			}
+		}
+
+		public async Task<IActionResult> OnPostAsync()
+		{
+			var headerRow = new List<string[]>() { new string[] { "ИД", "Модель", "ИД категории", "Название категории", "Гарантия (мес)" } };
+			var cellData = new List<object[]>() { };
+
+			foreach (var component in await _context.Components.ToListAsync())
+			{
+				if (component == null)
+					continue;
+
+				cellData.Add(new object[]
+				{
+					component.Id,
+					component.Name,
+					component.ComponentTypeId,
+					component.ComponentType!.Name,
+					component.Warranty
+				});
+			}
+
+			return await ExportHelper.ExportToExcel(this, "Комплектующие", headerRow, cellData);
 		}
 	}
 }

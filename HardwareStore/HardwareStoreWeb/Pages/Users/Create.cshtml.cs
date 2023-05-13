@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using HardwareStoreWeb;
 using HardwareStoreWeb.Models;
+using HardwareStoreWeb.Utilities;
+using System.Security.Cryptography;
 
 namespace HardwareStoreWeb.Pages.Users
 {
@@ -35,6 +37,10 @@ namespace HardwareStoreWeb.Pages.Users
 			{
 				return OnGet();
 			}
+
+			User.RegistrationDate = DateTime.UtcNow;
+			User.LastVisitDate = DateTime.UtcNow;
+			User.Password = HashHelper.GetHash(SHA256.Create(), User.Password);
 
 			_context.Users.Add(User);
 			await _context.SaveChangesAsync();

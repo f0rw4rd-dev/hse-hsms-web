@@ -25,7 +25,7 @@ namespace HardwareStoreWeb.Models
         [Required(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "Required")]
         public int ComponentId { get; set; }
 
-        [DisplayName("Комплектующее"), JsonIgnore]
+        [DisplayName("Комплектующее")]
         public virtual Component? Component { get; set; }
     }
 }

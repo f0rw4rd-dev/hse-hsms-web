@@ -33,7 +33,6 @@ namespace HardwareStoreWeb.Models
         [DisplayName("Статус")]
         public OrderStatus Status { get; set; }
 
-        [JsonIgnore]
         public virtual ICollection<OrderComponent> OrderComponents { get; private set; } = new ObservableCollection<OrderComponent>();
     }
 }

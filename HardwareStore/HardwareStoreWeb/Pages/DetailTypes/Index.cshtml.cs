@@ -8,10 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using HardwareStoreWeb;
 using HardwareStoreWeb.Models;
 using HardwareStoreWeb.Utilities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HardwareStoreWeb.Pages.DetailTypes
 {
-	public class IndexModel : PageModel
+    [Authorize]
+    public class IndexModel : PageModel
 	{
 		private readonly HardwareStoreWeb.StoreContext _context;
 
@@ -36,6 +38,26 @@ namespace HardwareStoreWeb.Pages.DetailTypes
 					DetailType = Pagination.Items;
 				}
 			}
+		}
+
+		public async Task<IActionResult> OnPostAsync()
+		{
+			var headerRow = new List<string[]>() { new string[] { "ИД", "Название" } };
+			var cellData = new List<object[]>() { };
+
+			foreach (var detailType in _context.DetailTypes.ToList())
+			{
+				if (detailType == null)
+					continue;
+
+				cellData.Add(new object[] 
+				{ 
+					detailType.Id, 
+					detailType.Name 
+				});
+			}
+
+			return await ExportHelper.ExportToExcel(this, "Типы характеристик комплектующих", headerRow, cellData);
 		}
 	}
 }

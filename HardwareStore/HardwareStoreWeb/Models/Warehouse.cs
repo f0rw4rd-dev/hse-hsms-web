@@ -42,13 +42,10 @@ namespace HardwareStoreWeb.Models
             } 
         }
 
-        [JsonIgnore]
         public virtual ICollection<ComponentStorage> ComponentStorages { get; private set; } = new ObservableCollection<ComponentStorage>();
 
-        [JsonIgnore]
         public virtual ICollection<OrderComponent> OrderComponents { get; private set; } = new ObservableCollection<OrderComponent>();
 
-        [JsonIgnore]
         public virtual ICollection<Supply> Supplies { get; private set; } = new ObservableCollection<Supply>();
     }
 }

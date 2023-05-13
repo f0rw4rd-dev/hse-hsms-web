@@ -8,10 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using HardwareStoreWeb;
 using HardwareStoreWeb.Models;
 using HardwareStoreWeb.Utilities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HardwareStoreWeb.Pages.Configurations
 {
-	public class IndexModel : PageModel
+    [Authorize]
+    public class IndexModel : PageModel
 	{
 		private readonly HardwareStoreWeb.StoreContext _context;
 
@@ -39,6 +41,28 @@ namespace HardwareStoreWeb.Pages.Configurations
 					Configuration = Pagination.Items;
 				}
 			}
+		}
+
+		public async Task<IActionResult> OnPostAsync()
+		{
+			var headerRow = new List<string[]>() { new string[] { "ИД", "ИД конфигурации", "ИД комплектующего", "Количество" } };
+			var cellData = new List<object[]>() { };
+
+			foreach (var configuration in _context.Configurations.ToList())
+			{
+				if (configuration == null)
+					continue;
+
+				cellData.Add(new object[] 
+				{ 
+					configuration.Id,
+					configuration.ConfigurationId,
+					configuration.ComponentId, 
+					configuration.Amount 
+				});
+			}
+
+			return await ExportHelper.ExportToExcel(this, "Конфигурации", headerRow, cellData);
 		}
 	}
 }

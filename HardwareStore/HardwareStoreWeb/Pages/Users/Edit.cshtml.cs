@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HardwareStoreWeb;
 using HardwareStoreWeb.Models;
+using HardwareStoreWeb.Utilities;
+using System.Security.Cryptography;
 
 namespace HardwareStoreWeb.Pages.Users
 {
@@ -35,6 +37,7 @@ namespace HardwareStoreWeb.Pages.Users
 			{
 				return NotFound();
 			}
+			user.Password = "";
 			User = user;
 			return Page();
 		}
@@ -48,7 +51,11 @@ namespace HardwareStoreWeb.Pages.Users
 				return await OnGetAsync(User.Id);
 			}
 
-			_context.Attach(User).State = EntityState.Modified;
+			var user = await _context.Users.FindAsync(User.Id);
+			if (user != null)
+			{
+				user.Password = HashHelper.GetHash(SHA256.Create(), User.Password);
+            }
 
 			try
 			{

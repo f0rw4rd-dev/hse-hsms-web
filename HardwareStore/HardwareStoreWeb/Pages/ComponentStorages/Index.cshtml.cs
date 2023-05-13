@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using HardwareStoreWeb;
 using HardwareStoreWeb.Models;
 using HardwareStoreWeb.Utilities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HardwareStoreWeb.Pages.ComponentStorages
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly HardwareStoreWeb.StoreContext _context;
@@ -41,5 +43,28 @@ namespace HardwareStoreWeb.Pages.ComponentStorages
 				}
 			}
         }
-    }
+
+		public async Task<IActionResult> OnPostAsync()
+		{
+			var headerRow = new List<string[]>() { new string[] { "ИД", "ИД склада", "ИД комплектующего", "Цена (руб)", "Количество (шт)" } };
+			var cellData = new List<object[]>() { };
+
+			foreach (var componentStorage in _context.ComponentStorages.ToList())
+			{
+				if (componentStorage == null)
+					continue;
+
+				cellData.Add(new object[] 
+				{ 
+					componentStorage.Id,
+					componentStorage.WarehouseId, 
+					componentStorage.ComponentId,
+					componentStorage.Price,
+					componentStorage.Amount 
+				});
+			}
+
+			return await ExportHelper.ExportToExcel(this, "Учет комплектующих", headerRow, cellData);
+		}
+	}
 }

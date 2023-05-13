@@ -14,14 +14,14 @@ namespace HardwareStoreWeb.Models
         [DisplayName("ИД типа характеристики")]
         public int DetailTypeId { get; set; }
 
-		[DisplayName("Тип характеристики"), JsonIgnore]
+		[DisplayName("Тип характеристики")]
 		public virtual DetailType? DetailType { get; set; }
 
         [DisplayName("ИД комплектующего")]
         [Required(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "Required")]
         public int ComponentId { get; set; }
 
-        [DisplayName("Комплектующее"), JsonIgnore]
+        [DisplayName("Комплектующее")]
         public virtual Component? Component { get; set; }
 
         [DisplayName("Значение")]

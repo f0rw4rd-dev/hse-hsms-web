@@ -1,0 +1,86 @@
+﻿@page
+@model HardwareStoreWeb.Pages.LoginModel
+@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<title>HardwareStore | Авторизация</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="~/fonts/nunito.css">
+	<link rel="stylesheet" href="~/fonts/fontawesome-all.min.css">
+	<link rel="stylesheet" href="~/css/main.compiled.css">
+	<link rel="stylesheet" href="~/lib/toastr/toastr.min.css">
+</head>
+
+<body class="d-flex justify-content-center align-items-center align-content-center justify-content-md-center bg-gradient-dark align-items-center">
+	<div class="container d-flex justify-content-center align-items-center align-content-center justify-content-md-center align-items-center">
+		<div class="card shadow-lg o-hidden-5 border-0 my-5 col-xxl-5 col-xl-5 col-lg-5">
+			<div class="card-body p-0">
+				<div class="p-5">
+					<div class="text-center">
+						<h4 class="text-dark mb-4">Авторизация</h4>
+					</div>
+					<form method="post">
+						<div class="mb-3">
+							<input class="form-control form-control-user" type="text" placeholder="Введите идентификатор..." name="id" required>
+						</div>
+						<div class="mb-3">
+							<input class="form-control form-control-user" type="password" placeholder="Введите пароль..." name="Password" required>
+						</div>
+						<div class="mb-3">
+							<div class="custom-control custom-checkbox small">
+								<div class="form-check">
+									<input class="form-check-input custom-control-input" type="checkbox" id="remember">
+									<label class="form-check-label custom-control-label" for="remember">Запомнить</label>
+								</div>
+							</div>
+						</div>
+						<button class="btn btn-dark d-block btn-user w-100" type="submit">Войти</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+	<script src="~/js/bs-init.js"></script>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/toastr/toastr.min.js"></script>
+	<script src="~/js/theme.js"></script>
+	<script src="~/js/setup.js"></script>
+
+	@if (ViewData.ContainsKey("SuccessMessage"))
+	{
+		<script>
+			toastr.success('@ViewData["SuccessMessage"]');
+		</script>
+	}
+
+	@if (ViewData.ContainsKey("ErrorMessage"))
+	{
+		<script>
+			toastr.error('@ViewData["ErrorMessage"]');
+		</script>
+	}
+
+	@if (ViewData.ContainsKey("WarningMessage"))
+	{
+		<script>
+			toastr.warning('@ViewData["WarningMessage"]');
+		</script>
+	}
+
+	@if (ViewData.ContainsKey("InfoMessage"))
+	{
+		<script>
+			toastr.info(@ViewData["InfoMessage"]);
+		</script>
+	}
+</body>
+
+</html>

@@ -2,7 +2,7 @@
 @model HardwareStoreWeb.Pages.Users.IndexModel
 
 @{
-    ViewData["Title"] = "Пользователи";
+	ViewData["Title"] = "Пользователи";
 }
 
 <div class="row mb-3">
@@ -10,17 +10,19 @@
 		<h3 class="text-dark mb-0">Пользователи</h3>
 	</div>
 	<div class="col d-lg-flex d-xl-flex d-xxl-flex justify-content-lg-end justify-content-xl-end justify-content-xxl-end me-0">
-		<div>
-			<a class="btn btn-dark btn-sm me-2 my-1" role="button" asp-page="/Users/Create">
-				<i class="fas fa-plus fa-sm text-white-50"></i>&nbsp; Добавить
-			</a>
-			<a class="btn btn-dark btn-sm me-2 my-1" role="button" href="#">
-				<i class="fas fa-filter fa-sm text-white-50"></i>&nbsp; Фильтр
-			</a>
-			<a class="btn btn-dark btn-sm ml-2 my-1" role="button" href="#">
-				<i class="fas fa-file-export fa-sm text-white-50"></i>&nbsp; Экспорт
-			</a>
-		</div>
+		<form method="post">
+			<div>
+				<a class="btn btn-dark btn-sm me-2 my-1" role="button" asp-page="/Users/Create">
+					<i class="fas fa-plus fa-sm text-white-50"></i>&nbsp; Добавить
+				</a>
+				<a class="btn btn-dark btn-sm me-2 my-1" role="button" href="#">
+					<i class="fas fa-filter fa-sm text-white-50"></i>&nbsp; Фильтр
+				</a>
+				<button class="btn btn-dark btn-sm ml-2 my-1" type="submit">
+					<i class="fas fa-file-export fa-sm text-white-50"></i>&nbsp; Экспорт
+				</button>
+			</div>
+		</form>
 	</div>
 </div>
 <div class="card shadow">
@@ -28,23 +30,23 @@
 		<p class="text-dark m-0 fw-bold">Информация о всех пользователях</p>
 	</div>
 	<div class="card-body">
-@*		<div class="row">
-			<div class="col-md-6 text-nowrap">
-				<div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
-					<label class="form-label">
-						Выбрать&nbsp;&nbsp;
-						<select class="d-inline-block form-select form-select-sm">
-							<option value="10" selected="">10</option>
-							<option value="25">25</option>
-							<option value="50">50</option>
-							<option value="100">100</option>
-						</select>&nbsp;
-					</label>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="text-md-end dataTables_filter" id="dataTable_filter"><label class="form-label"><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Поиск..."></label></div>
-			</div>
+		@*		<div class="row">
+		<div class="col-md-6 text-nowrap">
+		<div id="dataTable_length" class="dataTables_length" aria-controls="dataTable">
+		<label class="form-label">
+		Выбрать&nbsp;&nbsp;
+		<select class="d-inline-block form-select form-select-sm">
+		<option value="10" selected="">10</option>
+		<option value="25">25</option>
+		<option value="50">50</option>
+		<option value="100">100</option>
+		</select>&nbsp;
+		</label>
+		</div>
+		</div>
+		<div class="col-md-6">
+		<div class="text-md-end dataTables_filter" id="dataTable_filter"><label class="form-label"><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Поиск..."></label></div>
+		</div>
 		</div>*@
 		@if (Model.User.Any())
 		{

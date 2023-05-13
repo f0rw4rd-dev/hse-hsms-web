@@ -37,5 +37,21 @@ namespace HardwareStoreWeb.Pages.Warehouses
 				}
 			}
 		}
+
+		public async Task<IActionResult> OnPostAsync()
+		{
+			var headerRow = new List<string[]>() { new string[] { "ИД", "Город", "Улица", "Дом", "Индекс" } };
+			var cellData = new List<object[]>() { };
+
+			foreach (var warehouse in _context.Warehouses.ToList())
+			{
+				if (warehouse == null)
+					continue;
+
+				cellData.Add(new object[] { warehouse.Id, warehouse.City, warehouse.Street, warehouse.House, warehouse.Zip });
+			}
+
+			return await ExportHelper.ExportToExcel(this, "Склады", headerRow, cellData);
+		}
 	}
 }

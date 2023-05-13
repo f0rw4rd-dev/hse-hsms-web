@@ -8,10 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using HardwareStoreWeb;
 using HardwareStoreWeb.Models;
 using HardwareStoreWeb.Utilities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HardwareStoreWeb.Pages.Suppliers
 {
-	public class IndexModel : PageModel
+    [Authorize]
+    public class IndexModel : PageModel
 	{
 		private readonly HardwareStoreWeb.StoreContext _context;
 
@@ -36,6 +38,26 @@ namespace HardwareStoreWeb.Pages.Suppliers
 					Supplier = Pagination.Items;
 				}
 			}
+		}
+
+		public async Task<IActionResult> OnPostAsync()
+		{
+			var headerRow = new List<string[]>() { new string[] { "ИД", "Наименование организации" } };
+			var cellData = new List<object[]>() { };
+
+			foreach (var supplier in _context.Suppliers.ToList())
+			{
+				if (supplier == null)
+					continue;
+
+				cellData.Add(new object[] 
+				{ 
+					supplier.Id, 
+					supplier.Name 
+				});
+			}
+
+			return await ExportHelper.ExportToExcel(this, "Поставщики", headerRow, cellData);
 		}
 	}
 }

@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using HardwareStoreWeb.Utilities;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace HardwareStoreWeb.Models
 {
@@ -34,12 +35,12 @@ namespace HardwareStoreWeb.Models
         public required string Password { get; set; }
 
         [DisplayName("Дата регистрации")]
-        [Required(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "Required")]
-        public DateTime RegistrationDate { get; set; }
+		[BindNever]
+		public DateTime RegistrationDate { get; set; }
 
         [DisplayName("Дата последнего входа")]
-        [Required(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "Required")]
-        public DateTime? LastVisitDate { get; set; }
+		[BindNever]
+		public DateTime LastVisitDate { get; set; }
 
         [DisplayName("Группа прав")]
         public Group Group { get; set; }
