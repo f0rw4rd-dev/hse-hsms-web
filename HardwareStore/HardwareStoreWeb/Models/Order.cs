@@ -9,15 +9,19 @@ namespace HardwareStoreWeb.Models
 {
     public enum OrderStatus : int
     {
-        [Description("Создан")]
+        [Display(Name = "Создан")]
         Created = 0,
-        [Description("В обработке")]
+
+        [Display(Name = "В обработке")]
         Processing = 1,
-        [Description("Готов")]
+
+        [Display(Name = "Готов")]
         Ready = 2,
-        [Description("Получен")]
+
+        [Display(Name = "Получен")]
         Received = 3,
-        [Description("Отменен")]
+
+        [Display(Name = "Отменен")]
         Canceled = 4
     }
 
@@ -33,6 +37,7 @@ namespace HardwareStoreWeb.Models
         [DisplayName("Статус")]
         public OrderStatus Status { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<OrderComponent> OrderComponents { get; private set; } = new ObservableCollection<OrderComponent>();
     }
 }

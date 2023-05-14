@@ -30,10 +30,19 @@ namespace HardwareStoreWeb.Models
         [Required(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "Required")]
         public int Warranty { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<ComponentDetail> ComponentDetails { get; private set; } = new ObservableCollection<ComponentDetail>();
-        public virtual ICollection<ComponentStorage> ComponentStorages { get; private set; } = new ObservableCollection<ComponentStorage>();
-        public virtual ICollection<OrderComponent> OrderComponents { get; private set; } = new ObservableCollection<OrderComponent>();
-        public virtual ICollection<Configuration> Configurations { get; private set; } = new ObservableCollection<Configuration>();
-        public virtual ICollection<Supply> Supplies { get; private set; } = new ObservableCollection<Supply>();
+
+		[JsonIgnore]
+		public virtual ICollection<ComponentStorage> ComponentStorages { get; private set; } = new ObservableCollection<ComponentStorage>();
+
+		[JsonIgnore]
+		public virtual ICollection<OrderComponent> OrderComponents { get; private set; } = new ObservableCollection<OrderComponent>();
+
+		[JsonIgnore]
+		public virtual ICollection<Configuration> Configurations { get; private set; } = new ObservableCollection<Configuration>();
+
+		[JsonIgnore]
+		public virtual ICollection<Supply> Supplies { get; private set; } = new ObservableCollection<Supply>();
     }
 }

@@ -7,6 +7,8 @@ using HardwareStoreWeb.Utilities;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
+using System.ComponentModel.DataAnnotations;
+using System.Reflection;
 
 namespace HardwareStoreWeb.Pages
 {
@@ -50,10 +52,12 @@ namespace HardwareStoreWeb.Pages
 
 			await _context.SaveChangesAsync();
 
+			var groupName = user.Group.GetType().GetMember(user.Group.ToString())[0].GetCustomAttribute<DisplayAttribute>()!.Name;
+
 			var claims = new List<Claim>
 			{
 				new Claim(ClaimTypes.Name, user.Id.ToString()),
-				new Claim("Group", user.Group.ToString())
+				new Claim("Group", groupName!)
 			};
 			var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 			await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));

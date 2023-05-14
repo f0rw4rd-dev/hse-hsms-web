@@ -36,6 +36,7 @@ namespace HardwareStoreWeb.Pages.Orders
 				return OnGet();
 			}
 
+			Order.Date = Order.Date.ToUniversalTime();
 			_context.Orders.Add(Order);
 			await _context.SaveChangesAsync();
 

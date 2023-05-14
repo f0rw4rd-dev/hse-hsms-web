@@ -1,10 +1,310 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Главная страница";
+	ViewData["Title"] = "Главная страница";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Добро пожаловать!</h1>
-    <p>В данной панели можно взаимодействовать со всеми таблицами.</p>
+<style>
+	.chart-area {
+		width: 100%;
+/*		height: auto;
+*/	}
+
+		.chart-area canvas {
+			width: 100% !important;
+/*			height: auto !important;
+*/		}
+</style>
+
+<div class="d-sm-flex justify-content-between align-items-center mb-4">
+	<h3 class="text-dark mb-0">Главная страница</h3>
 </div>
+<div class="row">
+	<div class="col-md-6 col-xl-3 mb-4">
+		<div class="card shadow border-start-primary py-2">
+			<div class="card-body">
+				<div class="row align-items-center no-gutters">
+					<div class="col me-2">
+						<div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>Комплектующие</span></div>
+						<div class="text-dark fw-bold h5 mb-0"><span>@ViewData["TotalComponents"]</span></div>
+					</div>
+					<div class="col-auto"><i class="fas fa-hdd fa-2x text-gray-300"></i></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6 col-xl-3 mb-4">
+		<div class="card shadow border-start-success py-2">
+			<div class="card-body">
+				<div class="row align-items-center no-gutters">
+					<div class="col me-2">
+						<div class="text-uppercase text-success fw-bold text-xs mb-1"><span>Поставки</span></div>
+						<div class="text-dark fw-bold h5 mb-0"><span>@ViewData["TotalSupplies"]</span></div>
+					</div>
+					<div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6 col-xl-3 mb-4">
+		<div class="card shadow border-start-info py-2">
+			<div class="card-body">
+				<div class="row align-items-center no-gutters">
+					<div class="col me-2">
+						<div class="text-uppercase text-info fw-bold text-xs mb-1"><span>Обработанные заказы</span></div>
+						<div class="row g-0 align-items-center">
+							<div class="col-auto">
+								<div class="text-dark fw-bold h5 mb-0 me-3"><span>@ViewData["PercentProcessedOrders"]%</span></div>
+							</div>
+							<div class="col">
+								<div class="progress progress-sm">
+									<div class="progress-bar bg-info" aria-valuenow="@ViewData["PercentProcessedOrders"]" aria-valuemin="0" aria-valuemax="100" style="width: @ViewData["PercentProcessedOrders"]%;"><span class="visually-hidden">@ViewData["PercentProcessedOrders"]%</span></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-auto"><i class="fas fa-clipboard-list fa-2x text-gray-300"></i></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6 col-xl-3 mb-4">
+		<div class="card shadow border-start-warning py-2">
+			<div class="card-body">
+				<div class="row align-items-center no-gutters">
+					<div class="col me-2">
+						<div class="text-uppercase text-warning fw-bold text-xs mb-1"><span>Заказы</span></div>
+						<div class="text-dark fw-bold h5 mb-0"><span>@ViewData["TotalOrders"]</span></div>
+					</div>
+					<div class="col-auto"><i class="fas fa-shopping-cart fa-2x text-gray-300"></i></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	@if (ViewData["TotalOrders"]!.ToString() != "0")
+	{
+		<div class="col-lg-7 col-xl-8">
+			<div class="card shadow mb-4">
+				<div class="card-header d-flex justify-content-between align-items-center">
+					<h6 class="text-primary fw-bold m-0">Заказы за последние 30 дней</h6>
+				</div>
+				<div class="card-body">
+					<div class="chart-area">
+						<canvas id="ordersChart"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+	@if (ViewData["TotalComponents"]!.ToString() != "0")
+	{
+		<div class="col-lg-5 col-xl-4">
+			<div class="card shadow mb-4">
+				<div class="card-header d-flex justify-content-between align-items-center">
+					<h6 class="text-primary fw-bold m-0">Категории комплектующих</h6>
+				</div>
+				<div class="card-body">
+					<div class="chart-area">
+						<canvas id="componentTypesChart"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+</div>
+
+@if (ViewData["TotalSupplies"]!.ToString() != "0")
+{
+	<div class="row">
+		<div class="col-lg-12 col-xl-12">
+			<div class="card shadow mb-4">
+				<div class="card-header d-flex justify-content-between align-items-center">
+					<h6 class="text-primary fw-bold m-0">Поставки за последние 30 дней</h6>
+				</div>
+				<div class="card-body">
+					<div class="chart-area">
+						<canvas id="suppliesChart"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
+@section Extra {
+	<script>
+		function generateComponentTypesChart() {
+			let apiUrl = window.location.origin + '/api/Components';
+
+			// Получение данных с сервера
+			fetch(apiUrl)
+				.then(response => response.json())
+				.then(data => {
+					// Подсчет количества комплектующих в каждой категории
+					let categoryCounts = {};
+					data.forEach(item => {
+						let category = item.componentType.name;
+						if (categoryCounts.hasOwnProperty(category)) {
+							categoryCounts[category]++;
+						} else {
+							categoryCounts[category] = 1;
+						}
+					});
+
+					// Заполнение categories и counts
+					let categories = Object.keys(categoryCounts);
+					let counts = categories.map(category => categoryCounts[category]);
+
+					// Генерация цветов для каждой категории
+					let colors = [];
+					for (let i = 0; i < categories.length; i++) {
+						let r = Math.floor(Math.random() * 256);
+						let g = Math.floor(Math.random() * 256);
+						let b = Math.floor(Math.random() * 256);
+						colors.push("rgb(" + r + ", " + g + ", " + b + ")");
+					}
+
+					// Создание диаграммы
+					let ctx = document.getElementById('componentTypesChart').getContext('2d');
+					let myPieChart = new Chart(ctx, {
+						type: 'pie',
+						data: {
+							labels: categories,
+							datasets: [{
+								data: counts,
+								backgroundColor: colors
+							}]
+						},
+						options: {
+							responsive: true,
+							maintainAspectRatio: false,
+							height: 400
+						}
+					});
+				})
+				.catch(error => console.error(error));
+		}
+
+		function generateOrdersChart() {
+			let apiUrl = '/api/Orders';
+
+			// Получение данных с сервера
+			fetch(apiUrl)
+				.then(response => response.json())
+				.then(data => {
+					// Фильтрация заказов по дате
+					let endDate = new Date();
+					let startDate = new Date();
+					startDate.setDate(endDate.getDate() - 30);
+					let filteredData = data.filter(item => new Date(item.date).getTime() >= startDate.getTime());
+
+					// Подсчет числа заказов на каждый день
+					let orderCounts = {};
+					filteredData.forEach(item => {
+						let date = item.date.split('T')[0];
+						if (orderCounts.hasOwnProperty(date)) {
+							orderCounts[date]++;
+						} else {
+							orderCounts[date] = 1;
+						}
+					});
+
+					// Заполнение dates и counts
+					let dates = Object.keys(orderCounts);
+					let counts = dates.map(date => orderCounts[date]);
+
+					// Выбор цвета
+					let r = Math.floor(Math.random() * 256);
+					let g = Math.floor(Math.random() * 256);
+					let b = Math.floor(Math.random() * 256);
+					let color = "rgb(" + r + ", " + g + ", " + b + ")";
+
+					// Создание графика
+					let ctx = document.getElementById('ordersChart').getContext('2d');
+					let myChart = new Chart(ctx, {
+						type: 'line',
+						data: {
+							labels: dates,
+							datasets: [{
+								label: 'Число заказов',
+								data: counts,
+								fill: false,
+								borderColor: color,
+								tension: 0.1
+							}]
+						},
+						options: {
+							responsive: true,
+							maintainAspectRatio: false,
+							height: 400
+						}
+					});
+				})
+				.catch(error => console.error(error));
+		}
+
+		function generateSuppliesChart() {
+			let apiUrl = '/api/Supplies';
+
+			// Получение данных с сервера
+			fetch(apiUrl)
+				.then(response => response.json())
+				.then(data => {
+					// Фильтрация поставок по дате
+					let endDate = new Date();
+					let startDate = new Date();
+					startDate.setDate(endDate.getDate() - 30);
+					let filteredData = data.filter(item => new Date(item.date).getTime() >= startDate.getTime());
+
+					// Подсчет числа поставок на каждый день
+					let supplyCounts = {};
+					filteredData.forEach(item => {
+						let date = item.date.split('T')[0];
+						if (supplyCounts.hasOwnProperty(date)) {
+							supplyCounts[date]++;
+						} else {
+							supplyCounts[date] = 1;
+						}
+					});
+
+					// Заполнение dates и counts
+					let dates = Object.keys(supplyCounts);
+					let counts = dates.map(date => supplyCounts[date]);
+
+					// Выбор цвета
+					let r = Math.floor(Math.random() * 256);
+					let g = Math.floor(Math.random() * 256);
+					let b = Math.floor(Math.random() * 256);
+					let color = "rgb(" + r + ", " + g + ", " + b + ")";
+
+					// Создание графика
+					let ctx = document.getElementById('suppliesChart').getContext('2d');
+					let myChart = new Chart(ctx, {
+						type: 'line',
+						data: {
+							labels: dates,
+							datasets: [{
+								label: 'Число поставок',
+								data: counts,
+								fill: false,
+								borderColor: color,
+								tension: 0.1
+							}]
+						},
+						options: {
+							responsive: true,
+							maintainAspectRatio: false,
+							height: 400
+						}
+					});
+				})
+				.catch(error => console.error(error));
+		}
+
+		generateComponentTypesChart();
+		generateOrdersChart();
+		generateSuppliesChart();
+	</script>
+}

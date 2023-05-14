@@ -48,6 +48,7 @@ namespace HardwareStoreWeb.Pages.Orders
 				return await OnGetAsync(Order.Id);
 			}
 
+			Order.Date = Order.Date.ToUniversalTime();
 			_context.Attach(Order).State = EntityState.Modified;
 
 			try

@@ -1,7 +1,7 @@
 ﻿@{
-    var user = ViewContext.HttpContext.User;
-    var userName = user.Identity?.Name;
-    var userGroup = user.FindFirst("Group")?.Value;
+	var user = ViewContext.HttpContext.User;
+	var userName = user.Identity?.Name;
+	var userGroup = user.FindFirst("Group")?.Value;
 }
 
 
@@ -9,105 +9,117 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>HSMS - @ViewData["Title"]</title>
-    <meta property="og:title" content="HSMS - Комплектующие">
-    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="~/fonts/nunito.css">
-    <link rel="stylesheet" href="~/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="~/css/main.compiled.css">
-    <link rel="stylesheet" href="~/lib/toastr/toastr.min.css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<title>HSMS - @ViewData["Title"]</title>
+	<meta property="og:title" content="HSMS - @ViewData["Title"]">
+	<link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="~/fonts/nunito.css">
+	<link rel="stylesheet" href="~/fonts/fontawesome-all.min.css">
+	<link rel="stylesheet" href="~/css/main.compiled.css">
+	<link rel="stylesheet" href="~/lib/toastr/toastr.min.css">
 </head>
 
 <body id="page-top">
-    <div id="wrapper">
-        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-dark p-0">
-            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
-                    <div class="sidebar-brand-icon"><i class="fas fa-heading"></i></div>
-                    <div class="sidebar-brand-text mx-3"><span>Hardware<br>Store</span></div>
-                </a>
-                <hr class="sidebar-divider my-0">
-                <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link active" asp-page="/Components/Index"><i class="far fa-hdd"></i><span>Комплектующие</span></a></li>
-                    <li class="nav-item"><a class="nav-link active" asp-page="/ComponentDetails/Index"><i class="far fa-list-alt"></i><span>Характеристики</span></a></li>
-                    <li class="nav-item"><a class="nav-link active" asp-page="/ComponentStorages/Index"><i class="far fa-file-excel"></i><span>Учет комплектующих</span></a></li>
-                    <li class="nav-item"><a class="nav-link active" asp-page="/ComponentTypes/Index"><i class="far fa-folder"></i><span>Категории</span></a></li>
-                    <li class="nav-item"><a class="nav-link active" asp-page="/DetailTypes/Index"><i class="fas fa-table"></i><span>Типы характеристик</span></a></li>
-                    <li class="nav-item"><a class="nav-link active" asp-page="/Configurations/Index"><i class="fas fa-server"></i><span>Конфигурации</span></a></li>
-                    <li class="nav-item"><a class="nav-link active" asp-page="/Warehouses/Index"><i class="fas fa-warehouse"></i><span>Склады</span></a></li>
-                    <li class="nav-item"><a class="nav-link active" asp-page="/Orders/Index"><i class="fas fa-shopping-cart"></i><span>Заказы</span></a></li>
-                    <li class="nav-item"><a class="nav-link active" asp-page="/OrderComponents/Index"><i class="fas fa-cart-arrow-down"></i><span>Содержимое заказов</span></a></li>
-                    <li class="nav-item"><a class="nav-link active" asp-page="/Suppliers/Index"><i class="fas fa-user-tie"></i><span>Поставщики</span></a></li>
-                    <li class="nav-item"><a class="nav-link active" asp-page="/Supplies/Index"><i class="far fa-calendar"></i><span>Поставки</span></a></li>
-                    <li class="nav-item"><a class="nav-link active" asp-page="/Users/Index"><i class="fas fa-users"></i><span>Пользователи</span></a></li>
-                </ul>
-                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
-            </div>
-        </nav>
-        <div class="d-flex flex-column" id="content-wrapper">
-            <div id="content">
-                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
-                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars text-dark"></i></button>
-                        <ul class="navbar-nav flex-nowrap ms-auto">
-                            <li class="nav-item dropdown no-arrow">
-                                <div class="nav-item dropdown no-arrow">
-                                    <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><i class="fas fa-user-tie fa-lg text-dark"></i><span class="d-none d-lg-inline me-2 text-gray-600 small">&nbsp; @userGroup #@userName</span></a>
-                                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="#"><i class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Настройки</a>
-                                        <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Выход</a>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-                <div class="container-fluid">
-                    @RenderBody()
-                </div>
-            </div>
-            <footer class="bg-white sticky-footer">
-                <div class="container my-auto">
-                    <div class="text-center my-auto copyright"><span>Copyright © Hardware Store 2023</span></div>
-                </div>
-            </footer>
-        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
-    </div>
-    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
-    <script src="~/js/bs-init.js"></script>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/toastr/toastr.min.js"></script>
-    <script src="~/js/theme.js"></script>
-    <script src="~/js/setup.js"></script>
+	<div id="wrapper">
+		<nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-dark p-0">
+			<div class="container-fluid d-flex flex-column p-0">
+				<a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+					<div class="sidebar-brand-icon"><i class="fas fa-heading"></i></div>
+					<div class="sidebar-brand-text mx-3"><span>Hardware<br>Store</span></div>
+				</a>
+				<hr class="sidebar-divider my-0">
+				<ul class="navbar-nav text-light" id="accordionSidebar">
+					<li class="nav-item"><a class="nav-link active" asp-page="/Index"><i class="fa fa-home"></i><span>Главная</span></a></li>
+					<li class="nav-item"><a class="nav-link active" asp-page="/Components/Index"><i class="far fa-hdd"></i><span>Комплектующие</span></a></li>
+					<li class="nav-item"><a class="nav-link active" asp-page="/ComponentDetails/Index"><i class="far fa-list-alt"></i><span>Характеристики</span></a></li>
+					<li class="nav-item"><a class="nav-link active" asp-page="/ComponentStorages/Index"><i class="far fa-file-excel"></i><span>Учет комплектующих</span></a></li>
+					<li class="nav-item"><a class="nav-link active" asp-page="/ComponentTypes/Index"><i class="far fa-folder"></i><span>Категории</span></a></li>
+					<li class="nav-item"><a class="nav-link active" asp-page="/DetailTypes/Index"><i class="fas fa-table"></i><span>Типы характеристик</span></a></li>
+					<li class="nav-item"><a class="nav-link active" asp-page="/Configurations/Index"><i class="fas fa-server"></i><span>Конфигурации</span></a></li>
+					<li class="nav-item"><a class="nav-link active" asp-page="/Warehouses/Index"><i class="fas fa-warehouse"></i><span>Склады</span></a></li>
+					<li class="nav-item"><a class="nav-link active" asp-page="/Orders/Index"><i class="fas fa-shopping-cart"></i><span>Заказы</span></a></li>
+					<li class="nav-item"><a class="nav-link active" asp-page="/OrderComponents/Index"><i class="fas fa-cart-arrow-down"></i><span>Содержимое заказов</span></a></li>
+					<li class="nav-item"><a class="nav-link active" asp-page="/Suppliers/Index"><i class="fas fa-user-tie"></i><span>Поставщики</span></a></li>
+					<li class="nav-item"><a class="nav-link active" asp-page="/Supplies/Index"><i class="far fa-calendar"></i><span>Поставки</span></a></li>
+					<li class="nav-item"><a class="nav-link active" asp-page="/Users/Index"><i class="fas fa-users"></i><span>Пользователи</span></a></li>
+				</ul>
+				<div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+			</div>
+		</nav>
+		<div class="d-flex flex-column" id="content-wrapper">
+			<div id="content">
+				<nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+					<div class="container-fluid">
+						<button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars text-dark"></i></button>
+						<ul class="navbar-nav flex-nowrap ms-auto">
+							<li class="nav-item dropdown no-arrow">
+								<div class="nav-item dropdown no-arrow">
+									<a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><i class="fas fa-user-tie fa-lg text-dark"></i><span class="d-none d-lg-inline me-2 text-gray-600 small">&nbsp; @userGroup #@userName</span></a>
+									<div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
+										<a class="dropdown-item" href="#">
+											<i class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Настройки
+										</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item" asp-page="/Logout">
+											<i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Выход
+										</a>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</nav>
+				<div class="container-fluid">
+					@RenderBody()
+				</div>
+			</div>
+			<footer class="bg-white sticky-footer">
+				<div class="container my-auto">
+					<div class="text-center my-auto copyright"><span>Copyright © Hardware Store 2023</span></div>
+				</div>
+			</footer>
+		</div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+	</div>
 
-    @if (ViewData.ContainsKey("SuccessMessage"))
-    {
-        <script>
-            toastr.success('@ViewData["SuccessMessage"]');
-        </script>
-    }
+	<script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/toastr/toastr.min.js"></script>
+	<script src="~/lib/chart.js/dist/chart.min.js"></script>
+	<script src="~/js/bs-init.js"></script>
+	<script src="~/js/theme.js"></script>
+	<script src="~/js/setup.js"></script>
 
-    @if (ViewData.ContainsKey("ErrorMessage"))
-    {
-        <script>
-            toastr.error('@ViewData["ErrorMessage"]');
-        </script>
-    }
+	@if (ViewData.ContainsKey("SuccessMessage"))
+	{
+		<script>
+			toastr.success('@ViewData["SuccessMessage"]');
+		</script>
+	}
 
-    @if (ViewData.ContainsKey("WarningMessage"))
-    {
-        <script>
-            toastr.warning('@ViewData["WarningMessage"]');
-        </script>
-    }
+	@if (ViewData.ContainsKey("ErrorMessage"))
+	{
+		<script>
+			toastr.error('@ViewData["ErrorMessage"]');
+		</script>
+	}
 
-    @if (ViewData.ContainsKey("InfoMessage"))
-    {
-        <script>
-            toastr.info(@ViewData["InfoMessage"]);
-        </script>
-    }
+	@if (ViewData.ContainsKey("WarningMessage"))
+	{
+		<script>
+			toastr.warning('@ViewData["WarningMessage"]');
+		</script>
+	}
 
-    @await RenderSectionAsync("Scripts", required: false)
+	@if (ViewData.ContainsKey("InfoMessage"))
+	{
+		<script>
+			toastr.info(@ViewData["InfoMessage"]);
+		</script>
+	}
+
+	@await RenderSectionAsync("Scripts", required: false)
+	@await RenderSectionAsync("Extra", required: false)
 </body>
 
 </html>

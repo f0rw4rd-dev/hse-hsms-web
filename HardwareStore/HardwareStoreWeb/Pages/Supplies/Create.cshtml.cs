@@ -60,7 +60,8 @@ namespace HardwareStoreWeb.Pages.Supplies
                 return OnGet();
             }
 
-            _context.Supplies.Add(Supply);
+			Supply.Date = Supply.Date.ToUniversalTime();
+			_context.Supplies.Add(Supply);
 			await _context.SaveChangesAsync();
 
 			return RedirectToPage("./Index");

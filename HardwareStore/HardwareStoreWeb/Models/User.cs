@@ -8,19 +8,19 @@ namespace HardwareStoreWeb.Models
 {
     public enum Group : int
     {
-        [Description("Продавец-консультант")]
+        [Display(Name = "Продавец-консультант")]
         Consultant = 0,
 
-        [Description("Менеджер по закупкам")]
+        [Display(Name = "Менеджер по закупкам")]
         PurchasingManager = 1,
 
-        [Description("Складской работник")]
+        [Display(Name = "Складской работник")]
         WarehouseWorker = 2,
 
-        [Description("Аналитик")]
+        [Display(Name = "Аналитик")]
         Analyst = 3,
 
-        [Description("Администратор")]
+        [Display(Name = "Администратор")]
         Admin = 4,
     }
 

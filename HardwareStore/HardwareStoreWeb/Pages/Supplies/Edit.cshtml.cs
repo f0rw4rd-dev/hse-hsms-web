@@ -72,7 +72,8 @@ namespace HardwareStoreWeb.Pages.Supplies
                 return await OnGetAsync(Supply.Id);
             }
 
-            _context.Attach(Supply).State = EntityState.Modified;
+			Supply.Date = Supply.Date.ToUniversalTime();
+			_context.Attach(Supply).State = EntityState.Modified;
 
 			try
 			{

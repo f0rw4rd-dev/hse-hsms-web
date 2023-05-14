@@ -7,16 +7,28 @@ namespace HardwareStoreWeb.Pages
     [Authorize]
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+		private readonly HardwareStoreWeb.StoreContext _context;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(HardwareStoreWeb.StoreContext context)
         {
-            _logger = logger;
-        }
+			_context = context;
+		}
 
         public void OnGet()
         {
+            ViewData["TotalComponents"] = _context.Components.Count();
+            ViewData["TotalSupplies"] = _context.Supplies.Count();
+            ViewData["TotalOrders"] = _context.Orders.Count();
 
-        }
+            if (_context.Components.Any()) 
+            {
+				ViewData["PercentProcessedOrders"] = (int)Math.Floor(_context.Orders.Where(x => x.Status != Models.OrderStatus.Created && x.Status != Models.OrderStatus.Processing).Count() / (double)_context.Orders.Count() * 100);
+			}
+            else
+            {
+                ViewData["PercentProcessedOrders"] = 100;
+
+			}
+		}
     }
 }

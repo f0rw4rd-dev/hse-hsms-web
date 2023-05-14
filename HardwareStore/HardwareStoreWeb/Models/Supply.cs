@@ -30,20 +30,23 @@ namespace HardwareStoreWeb.Models
         public int SupplierId { get; set; }
 
         [DisplayName("Поставщик")]
-        public virtual Supplier? Supplier { get; set; }
+		[JsonIgnore]
+		public virtual Supplier? Supplier { get; set; }
 
         [DisplayName("ИД комплектующего")]
         [Required(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "Required")]
         public int ComponentId { get; set; }
 
         [DisplayName("Комплектующее")]
-        public virtual Component? Component { get; set; }
+		[JsonIgnore]
+		public virtual Component? Component { get; set; }
 
         [DisplayName("ИД склада")]
         [Required(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "Required")]
         public int WarehouseId { get; set; }
 
         [DisplayName("Склад")]
+        [JsonIgnore]
         public virtual Warehouse? Warehouse { get; set; }
     }
 }
