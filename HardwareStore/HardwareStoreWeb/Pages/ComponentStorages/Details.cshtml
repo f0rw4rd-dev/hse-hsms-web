@@ -1,8 +1,17 @@
 ﻿@page
+@using HardwareStoreWeb.Models;
 @model HardwareStoreWeb.Pages.ComponentStorages.DetailsModel
 
 @{
     ViewData["Title"] = "Учет комплектующего";
+
+    var userGroupId = int.Parse(ViewContext.HttpContext.User.FindFirst("GroupId")?.Value!);
+	var permissions = Permission.permissions[(Group)userGroupId];
+
+	if (!permissions.ComponentStorages.CanView)
+	{
+		Response.Redirect("/Index");
+	}
 }
 
 <div class="row mb-3">
@@ -43,9 +52,12 @@
         </dl>
         <div class="col d-lg-flex d-xl-flex d-xxl-flex justify-content-lg-start justify-content-xl-start justify-content-xxl-start me-0 my-2">
             <div>
-                <a class="btn btn-dark btn-sm me-2 my-1" role="button" asp-page="./Edit" asp-route-id="@Model.ComponentStorage.Id">
-                    <i class="fas fa-pencil-alt fa-sm text-white-50"></i>&nbsp; Изменить
-                </a>
+                @if (permissions.ComponentStorages.CanEdit)
+                {
+                    <a class="btn btn-dark btn-sm me-2 my-1" role="button" asp-page="./Edit" asp-route-id="@Model.ComponentStorage.Id">
+                        <i class="fas fa-pencil-alt fa-sm text-white-50"></i>&nbsp; Изменить
+                    </a>
+                }
                 <a class="btn btn-dark btn-sm me-2 my-1" role="button" asp-page="./Index">
                     <i class="fas fa-arrow-left fa-sm text-white-50"></i>&nbsp; Вернуться
                 </a>

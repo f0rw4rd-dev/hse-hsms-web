@@ -1,8 +1,17 @@
 ﻿@page
+@using HardwareStoreWeb.Models;
 @model HardwareStoreWeb.Pages.DetailTypes.DeleteModel
 
 @{
     ViewData["Title"] = "Удалить тип характеристики";
+
+    var userGroupId = int.Parse(ViewContext.HttpContext.User.FindFirst("GroupId")?.Value!);
+	var permissions = Permission.permissions[(Group)userGroupId];
+
+	if (!permissions.DetailTypes.CanDelete)
+	{
+		Response.Redirect("/Index");
+	}
 }
 
 <div class="row mb-3">

@@ -57,7 +57,8 @@ namespace HardwareStoreWeb.Pages
 			var claims = new List<Claim>
 			{
 				new Claim(ClaimTypes.Name, user.Id.ToString()),
-				new Claim("Group", groupName!)
+				new Claim("Group", groupName!),
+				new Claim("GroupId", ((int)user.Group).ToString())
 			};
 			var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 			await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));

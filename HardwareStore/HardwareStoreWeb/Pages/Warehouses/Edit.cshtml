@@ -1,8 +1,17 @@
 ﻿@page
+@using HardwareStoreWeb.Models;
 @model HardwareStoreWeb.Pages.Warehouses.EditModel
 
 @{
     ViewData["Title"] = "Edit";
+
+    var userGroupId = int.Parse(ViewContext.HttpContext.User.FindFirst("GroupId")?.Value!);
+    var permissions = Permission.permissions[(Group)userGroupId];
+
+    if (!permissions.Warehouses.CanEdit)
+    {
+        Response.Redirect("/Index");
+    }
 }
 
 <h1>Edit</h1>

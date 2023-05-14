@@ -1,8 +1,17 @@
 ﻿@page
+@using HardwareStoreWeb.Models;
 @model HardwareStoreWeb.Pages.Supplies.DeleteModel
 
 @{
     ViewData["Title"] = "Удалить поставку";
+
+    var userGroupId = int.Parse(ViewContext.HttpContext.User.FindFirst("GroupId")?.Value!);
+    var permissions = Permission.permissions[(Group)userGroupId];
+
+    if (!permissions.Supplies.CanDelete)
+    {
+        Response.Redirect("/Index");
+    }
 }
 
 <div class="row mb-3">

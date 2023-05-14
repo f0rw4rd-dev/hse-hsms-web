@@ -1,8 +1,17 @@
 ﻿@page
+@using HardwareStoreWeb.Models;
 @model HardwareStoreWeb.Pages.Supplies.EditModel
 
 @{
     ViewData["Title"] = "Редактировать поставку";
+
+    var userGroupId = int.Parse(ViewContext.HttpContext.User.FindFirst("GroupId")?.Value!);
+    var permissions = Permission.permissions[(Group)userGroupId];
+
+    if (!permissions.Supplies.CanEdit)
+    {
+        Response.Redirect("/Index");
+    }
 }
 
 <div class="row mb-3">

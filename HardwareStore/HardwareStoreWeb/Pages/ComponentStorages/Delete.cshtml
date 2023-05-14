@@ -1,8 +1,17 @@
 ﻿@page
+@using HardwareStoreWeb.Models;
 @model HardwareStoreWeb.Pages.ComponentStorages.DeleteModel
 
 @{
     ViewData["Title"] = "Удалить учет комплектующего";
+
+    var userGroupId = int.Parse(ViewContext.HttpContext.User.FindFirst("GroupId")?.Value!);
+	var permissions = Permission.permissions[(Group)userGroupId];
+
+	if (!permissions.ComponentStorages.CanDelete)
+	{
+		Response.Redirect("/Index");
+	}
 }
 
 <div class="row mb-3">

@@ -1,9 +1,12 @@
-﻿@{
+﻿@using HardwareStoreWeb.Models;
+@{
 	var user = ViewContext.HttpContext.User;
-	var userName = user.Identity?.Name;
-	var userGroup = user.FindFirst("Group")?.Value;
-}
+	var userId = user.Identity?.Name;
+	var userGroupId = int.Parse(user.FindFirst("GroupId")?.Value!);
+	var userGroupName = user.FindFirst("Group")?.Value;
 
+	var permissions = Permission.permissions[(Group)userGroupId];
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,18 +34,55 @@
 				<hr class="sidebar-divider my-0">
 				<ul class="navbar-nav text-light" id="accordionSidebar">
 					<li class="nav-item"><a class="nav-link active" asp-page="/Index"><i class="fa fa-home"></i><span>Главная</span></a></li>
-					<li class="nav-item"><a class="nav-link active" asp-page="/Components/Index"><i class="far fa-hdd"></i><span>Комплектующие</span></a></li>
-					<li class="nav-item"><a class="nav-link active" asp-page="/ComponentDetails/Index"><i class="far fa-list-alt"></i><span>Характеристики</span></a></li>
-					<li class="nav-item"><a class="nav-link active" asp-page="/ComponentStorages/Index"><i class="far fa-file-excel"></i><span>Учет комплектующих</span></a></li>
-					<li class="nav-item"><a class="nav-link active" asp-page="/ComponentTypes/Index"><i class="far fa-folder"></i><span>Категории</span></a></li>
-					<li class="nav-item"><a class="nav-link active" asp-page="/DetailTypes/Index"><i class="fas fa-table"></i><span>Типы характеристик</span></a></li>
-					<li class="nav-item"><a class="nav-link active" asp-page="/Configurations/Index"><i class="fas fa-server"></i><span>Конфигурации</span></a></li>
-					<li class="nav-item"><a class="nav-link active" asp-page="/Warehouses/Index"><i class="fas fa-warehouse"></i><span>Склады</span></a></li>
-					<li class="nav-item"><a class="nav-link active" asp-page="/Orders/Index"><i class="fas fa-shopping-cart"></i><span>Заказы</span></a></li>
-					<li class="nav-item"><a class="nav-link active" asp-page="/OrderComponents/Index"><i class="fas fa-cart-arrow-down"></i><span>Содержимое заказов</span></a></li>
-					<li class="nav-item"><a class="nav-link active" asp-page="/Suppliers/Index"><i class="fas fa-user-tie"></i><span>Поставщики</span></a></li>
-					<li class="nav-item"><a class="nav-link active" asp-page="/Supplies/Index"><i class="far fa-calendar"></i><span>Поставки</span></a></li>
-					<li class="nav-item"><a class="nav-link active" asp-page="/Users/Index"><i class="fas fa-users"></i><span>Пользователи</span></a></li>
+
+					@if (permissions.Components.CanView)
+					{
+						<li class="nav-item"><a class="nav-link active" asp-page="/Components/Index"><i class="far fa-hdd"></i><span>Комплектующие</span></a></li>
+					}
+					@if (permissions.ComponentDetails.CanView)
+					{
+						<li class="nav-item"><a class="nav-link active" asp-page="/ComponentDetails/Index"><i class="far fa-list-alt"></i><span>Характеристики</span></a></li>
+					}
+					@if (permissions.ComponentStorages.CanView)
+					{
+						<li class="nav-item"><a class="nav-link active" asp-page="/ComponentStorages/Index"><i class="far fa-file-excel"></i><span>Учет комплектующих</span></a></li>
+					}
+					@if (permissions.ComponentTypes.CanView)
+					{
+						<li class="nav-item"><a class="nav-link active" asp-page="/ComponentTypes/Index"><i class="far fa-folder"></i><span>Категории</span></a></li>
+					}
+					@if (permissions.DetailTypes.CanView)
+					{
+						<li class="nav-item"><a class="nav-link active" asp-page="/DetailTypes/Index"><i class="fas fa-table"></i><span>Типы характеристик</span></a></li>
+					}
+					@if (permissions.Configurations.CanView)
+					{
+						<li class="nav-item"><a class="nav-link active" asp-page="/Configurations/Index"><i class="fas fa-server"></i><span>Конфигурации</span></a></li>
+					}
+					@if (permissions.Warehouses.CanView)
+					{
+						<li class="nav-item"><a class="nav-link active" asp-page="/Warehouses/Index"><i class="fas fa-warehouse"></i><span>Склады</span></a></li>
+					}
+					@if (permissions.Orders.CanView)
+					{
+						<li class="nav-item"><a class="nav-link active" asp-page="/Orders/Index"><i class="fas fa-shopping-cart"></i><span>Заказы</span></a></li>
+					}
+					@if (permissions.OrderComponents.CanView)
+					{
+						<li class="nav-item"><a class="nav-link active" asp-page="/OrderComponents/Index"><i class="fas fa-cart-arrow-down"></i><span>Содержимое заказов</span></a></li>
+					}
+					@if (permissions.Suppliers.CanView)
+					{
+						<li class="nav-item"><a class="nav-link active" asp-page="/Suppliers/Index"><i class="fas fa-user-tie"></i><span>Поставщики</span></a></li>
+					}
+					@if (permissions.Supplies.CanView)
+					{
+						<li class="nav-item"><a class="nav-link active" asp-page="/Supplies/Index"><i class="far fa-calendar"></i><span>Поставки</span></a></li>
+					}
+					@if (permissions.Users.CanView)
+					{
+						<li class="nav-item"><a class="nav-link active" asp-page="/Users/Index"><i class="fas fa-users"></i><span>Пользователи</span></a></li>
+					}
 				</ul>
 				<div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
 			</div>
@@ -55,7 +95,7 @@
 						<ul class="navbar-nav flex-nowrap ms-auto">
 							<li class="nav-item dropdown no-arrow">
 								<div class="nav-item dropdown no-arrow">
-									<a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><i class="fas fa-user-tie fa-lg text-dark"></i><span class="d-none d-lg-inline me-2 text-gray-600 small">&nbsp; @userGroup #@userName</span></a>
+									<a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><i class="fas fa-user-tie fa-lg text-dark"></i><span class="d-none d-lg-inline me-2 text-gray-600 small">&nbsp; @userGroupName #@userId</span></a>
 									<div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
 										<a class="dropdown-item" href="#">
 											<i class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Настройки

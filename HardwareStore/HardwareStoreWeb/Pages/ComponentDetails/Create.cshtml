@@ -1,8 +1,17 @@
 ﻿@page
+@using HardwareStoreWeb.Models;
 @model HardwareStoreWeb.Pages.ComponentDetails.CreateModel
 
 @{
     ViewData["Title"] = "Добавить характеристику комплектующего";
+
+    var userGroupId = int.Parse(ViewContext.HttpContext.User.FindFirst("GroupId")?.Value!);
+    var permissions = Permission.permissions[(Group)userGroupId];
+
+    if (!permissions.ComponentDetails.CanCreate)
+    {
+        Response.Redirect("/Index");
+    }
 }
 
 <div class="row mb-3">

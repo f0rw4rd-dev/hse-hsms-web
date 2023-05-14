@@ -1,8 +1,17 @@
 ﻿@page
+@using HardwareStoreWeb.Models;
 @model HardwareStoreWeb.Pages.OrderComponents.IndexModel
 
 @{
 	ViewData["Title"] = "Содержимое заказов";
+
+	var userGroupId = int.Parse(ViewContext.HttpContext.User.FindFirst("GroupId")?.Value!);
+	var permissions = Permission.permissions[(Group)userGroupId];
+
+	if (!permissions.OrderComponents.CanView)
+	{
+		Response.Redirect("/Index");
+	}
 }
 
 <div class="row mb-3">
@@ -12,9 +21,12 @@
 	<div class="col d-lg-flex d-xl-flex d-xxl-flex justify-content-lg-end justify-content-xl-end justify-content-xxl-end me-0">
 		<form method="post">
 			<div>
-				<a class="btn btn-dark btn-sm me-2 my-1" role="button" asp-page="/OrderComponents/Create">
-					<i class="fas fa-plus fa-sm text-white-50"></i>&nbsp; Добавить
-				</a>
+				@if (permissions.OrderComponents.CanCreate)
+				{
+					<a class="btn btn-dark btn-sm me-2 my-1" role="button" asp-page="/OrderComponents/Create">
+						<i class="fas fa-plus fa-sm text-white-50"></i>&nbsp; Добавить
+					</a>
+				}
 				<a class="btn btn-dark btn-sm me-2 my-1" role="button" href="#">
 					<i class="fas fa-filter fa-sm text-white-50"></i>&nbsp; Фильтр
 				</a>
@@ -98,15 +110,21 @@
 									[@Html.DisplayFor(modelItem => item.ComponentId)] @Html.DisplayFor(modelItem => item.Component!.Name)
 								</td>
 								<td>
-									<a class="btn btn-dark btn-sm me-2 my-1" role="button" asp-page="./Edit" asp-route-id="@item.Id">
-										<i class="fas fa-pencil-alt fa-sm text-white-50"></i>&nbsp; Изменить
-									</a>
+									@if (permissions.OrderComponents.CanEdit)
+									{
+										<a class="btn btn-dark btn-sm me-2 my-1" role="button" asp-page="./Edit" asp-route-id="@item.Id">
+											<i class="fas fa-pencil-alt fa-sm text-white-50"></i>&nbsp; Изменить
+										</a>
+									}
 									<a class="btn btn-dark btn-sm me-2 my-1" role="button" asp-page="./Details" asp-route-id="@item.Id">
 										<i class="fas fa-info fa-sm text-white-50"></i>&nbsp; Открыть
 									</a>
-									<a class="btn btn-dark btn-sm me-2 my-1" role="button" asp-page="./Delete" asp-route-id="@item.Id">
-										<i class="fas fa-trash-alt fa-sm text-white-50"></i>&nbsp; Удалить
-									</a>
+									@if (permissions.OrderComponents.CanDelete)
+									{
+										<a class="btn btn-dark btn-sm me-2 my-1" role="button" asp-page="./Delete" asp-route-id="@item.Id">
+											<i class="fas fa-trash-alt fa-sm text-white-50"></i>&nbsp; Удалить
+										</a>
+									}
 								</td>
 							</tr>
 						}

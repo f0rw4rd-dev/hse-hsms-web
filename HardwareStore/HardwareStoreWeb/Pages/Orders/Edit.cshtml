@@ -4,6 +4,14 @@
 
 @{
     ViewData["Title"] = "Редактировать заказ";
+
+    var userGroupId = int.Parse(ViewContext.HttpContext.User.FindFirst("GroupId")?.Value!);
+    var permissions = Permission.permissions[(Group)userGroupId];
+
+    if (!permissions.Orders.CanEdit)
+    {
+        Response.Redirect("/Index");
+    }
 }
 
 <div class="row mb-3">

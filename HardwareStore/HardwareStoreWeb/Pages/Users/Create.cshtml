@@ -4,6 +4,14 @@
 
 @{
     ViewData["Title"] = "Добавить пользователя";
+
+    var userGroupId = int.Parse(ViewContext.HttpContext.User.FindFirst("GroupId")?.Value!);
+	var permissions = Permission.permissions[(Group)userGroupId];
+
+    if (!permissions.Users.CanCreate)
+	{
+		Response.Redirect("/Index");
+	}
 }
 
 <div class="row mb-3">
