@@ -30,7 +30,7 @@ namespace HardwareStoreWeb.Pages.DetailTypes
 		{
 			if (_context.DetailTypes != null)
 			{
-				DetailType = await _context.DetailTypes.ToListAsync();
+				DetailType = await _context.DetailTypes.OrderBy(x => x.Id).ToListAsync();
 
 				if (DetailType.Any())
 				{
