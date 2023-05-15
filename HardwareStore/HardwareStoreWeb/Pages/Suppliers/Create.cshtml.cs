@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using HardwareStoreWeb;
 using HardwareStoreWeb.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HardwareStoreWeb.Pages.Suppliers
 {
@@ -36,7 +37,14 @@ namespace HardwareStoreWeb.Pages.Suppliers
 				return OnGet();
 			}
 
-			_context.Suppliers.Add(Supplier);
+            var supplierExist = await _context.Suppliers.Where(x => x.Name == Supplier.Name).AnyAsync();
+            if (supplierExist)
+            {
+                ViewData["ErrorMessage"] = "Поставщик с таким названием уже существует!";
+                return OnGet();
+            }
+
+            _context.Suppliers.Add(Supplier);
 			await _context.SaveChangesAsync();
 
 			return RedirectToPage("./Index");

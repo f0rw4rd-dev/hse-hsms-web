@@ -57,6 +57,13 @@ namespace HardwareStoreWeb.Pages.ComponentDetails
                 return await OnGetAsync(ComponentDetail.Id);
             }
 
+            var omponentDetailExist = await _context.ComponentDetails.Where(x => x.ComponentId == ComponentDetail.ComponentId && x.DetailTypeId == ComponentDetail.DetailTypeId && x.Id != ComponentDetail.Id).AnyAsync();
+            if (omponentDetailExist)
+            {
+                ViewData["ErrorMessage"] = "Для данного комплектующего такая характеристика уже имеется!";
+                return await OnGetAsync(ComponentDetail.Id);
+            }
+
             _context.Attach(ComponentDetail).State = EntityState.Modified;
 
             try

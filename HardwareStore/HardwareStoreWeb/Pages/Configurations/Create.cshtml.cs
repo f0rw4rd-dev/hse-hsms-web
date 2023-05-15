@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using HardwareStoreWeb;
 using HardwareStoreWeb.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HardwareStoreWeb.Pages.Configurations
 {
@@ -41,6 +42,13 @@ namespace HardwareStoreWeb.Pages.Configurations
             if (component == null)
             {
                 ViewData["ErrorMessage"] = "Комплектующее с данным ИД не существует!";
+                return OnGet();
+            }
+
+            var configurationExist = await _context.Configurations.Where(x => x.ConfigurationId == Configuration.ConfigurationId && x.ComponentId == Configuration.ComponentId).AnyAsync();
+            if (configurationExist)
+            {
+                ViewData["ErrorMessage"] = "В данной сборке уже имеется такое комплектующее!";
                 return OnGet();
             }
 

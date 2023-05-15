@@ -48,7 +48,14 @@ namespace HardwareStoreWeb.Pages.DetailTypes
 				return await OnGetAsync(DetailType.Id);
 			}
 
-			_context.Attach(DetailType).State = EntityState.Modified;
+            var detailTypeExist = await _context.DetailTypes.Where(x => x.Name == DetailType.Name && x.Id != DetailType.Id).AnyAsync();
+            if (detailTypeExist)
+            {
+                ViewData["ErrorMessage"] = "Тип характеристик с таким названием уже существует!";
+                return await OnGetAsync(DetailType.Id);
+            }
+
+            _context.Attach(DetailType).State = EntityState.Modified;
 
 			try
 			{

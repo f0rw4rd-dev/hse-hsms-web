@@ -56,6 +56,13 @@ namespace HardwareStoreWeb.Pages.Configurations
                 return await OnGetAsync(Configuration.Id);
             }
 
+            var configurationExist = await _context.Configurations.Where(x => x.ConfigurationId == Configuration.ConfigurationId && x.ComponentId == Configuration.ComponentId && x.Id != Configuration.Id).AnyAsync();
+            if (configurationExist)
+            {
+                ViewData["ErrorMessage"] = "В данной сборке уже имеется такое комплектующее!";
+                return await OnGetAsync(Configuration.Id);
+            }
+
             _context.Attach(Configuration).State = EntityState.Modified;
 
 			try

@@ -48,7 +48,14 @@ namespace HardwareStoreWeb.Pages.Suppliers
 				return await OnGetAsync(Supplier.Id);
 			}
 
-			_context.Attach(Supplier).State = EntityState.Modified;
+            var supplierExist = await _context.Suppliers.Where(x => x.Name == Supplier.Name && x.Id != Supplier.Id).AnyAsync();
+            if (supplierExist)
+            {
+                ViewData["ErrorMessage"] = "Поставщик с таким названием уже существует!";
+                return await OnGetAsync(Supplier.Id);
+            }
+
+            _context.Attach(Supplier).State = EntityState.Modified;
 
 			try
 			{

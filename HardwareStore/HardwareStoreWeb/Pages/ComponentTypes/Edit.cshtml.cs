@@ -48,7 +48,14 @@ namespace HardwareStoreWeb.Pages.ComponentTypes
 				return await OnGetAsync(ComponentType.Id);
 			}
 
-			_context.Attach(ComponentType).State = EntityState.Modified;
+            var componentTypeExist = await _context.ComponentTypes.Where(x => x.Name == ComponentType.Name && x.Id != ComponentType.Id).AnyAsync();
+            if (componentTypeExist)
+            {
+                ViewData["ErrorMessage"] = "Категория с таким названием уже существует!";
+                return await OnGetAsync(ComponentType.Id);
+            }
+
+            _context.Attach(ComponentType).State = EntityState.Modified;
 
 			try
 			{

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using HardwareStoreWeb;
 using HardwareStoreWeb.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HardwareStoreWeb.Pages.DetailTypes
 {
@@ -36,7 +37,14 @@ namespace HardwareStoreWeb.Pages.DetailTypes
 				return OnGet();
 			}
 
-			_context.DetailTypes.Add(DetailType);
+            var detailTypeExist = await _context.DetailTypes.Where(x => x.Name == DetailType.Name).AnyAsync();
+            if (detailTypeExist)
+            {
+                ViewData["ErrorMessage"] = "Тип характеристик с таким названием уже существует!";
+                return OnGet();
+            }
+
+            _context.DetailTypes.Add(DetailType);
 			await _context.SaveChangesAsync();
 
 			return RedirectToPage("./Index");

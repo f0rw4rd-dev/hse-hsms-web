@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using HardwareStoreWeb;
 using HardwareStoreWeb.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HardwareStoreWeb.Pages.ComponentDetails
 {
@@ -38,12 +39,19 @@ namespace HardwareStoreWeb.Pages.ComponentDetails
                 return OnGet();
             }
 
-            var component = await _context.Components.FindAsync(ComponentDetail.Id);
+            var component = await _context.Components.FindAsync(ComponentDetail.ComponentId);
             if (component == null)
             {
                 ViewData["ErrorMessage"] = "Комплектующее с данным ИД не существует!";
                 return OnGet();
 			}
+
+            var omponentDetailExist = await _context.ComponentDetails.Where(x => x.ComponentId == ComponentDetail.ComponentId && x.DetailTypeId == ComponentDetail.DetailTypeId).AnyAsync();
+            if (omponentDetailExist)
+            {
+                ViewData["ErrorMessage"] = "Для данного комплектующего такая характеристика уже имеется!";
+                return OnGet();
+            }
 
             _context.ComponentDetails.Add(ComponentDetail);
             await _context.SaveChangesAsync();

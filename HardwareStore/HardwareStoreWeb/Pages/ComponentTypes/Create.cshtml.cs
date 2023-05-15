@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using HardwareStoreWeb;
 using HardwareStoreWeb.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HardwareStoreWeb.Pages.ComponentTypes
 {
@@ -35,6 +36,13 @@ namespace HardwareStoreWeb.Pages.ComponentTypes
 			{
 				return OnGet();
 			}
+
+			var componentTypeExist = await _context.ComponentTypes.Where(x => x.Name == ComponentType.Name).AnyAsync();
+			if (componentTypeExist)
+			{
+				ViewData["ErrorMessage"] = "Категория с таким названием уже существует!";
+                return OnGet();
+            }
 
 			_context.ComponentTypes.Add(ComponentType);
 			await _context.SaveChangesAsync();
