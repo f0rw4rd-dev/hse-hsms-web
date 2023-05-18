@@ -32,10 +32,9 @@ namespace HardwareStoreWeb
             Database.EnsureCreated();
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public StoreContext(DbContextOptions<StoreContext> options) : base(options)
         {
-            optionsBuilder.UseNpgsql($"Host={DbData.Host};Port={DbData.Port};Database={DbData.Database};Username={DbData.Username};Password={DbData.Password}");
-            optionsBuilder.UseLazyLoadingProxies();
+            Database.EnsureCreated();
         }
     }
 }
