@@ -12,7 +12,7 @@ namespace HardwareStoreWeb.Models
 		public int Id { get; set; }
 
         [DisplayName("Цена поставки (руб)")]
-        [Range(0, float.MaxValue, ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "Range")]
+        [Range(0.1, float.MaxValue, ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "Range")]
         [Required(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = "Required")]
         public float SupplyPrice { get; set; }
 
