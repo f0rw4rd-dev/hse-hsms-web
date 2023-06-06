@@ -1,4 +1,4 @@
-using HardwareStoreWeb.Models;
+п»їusing HardwareStoreWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -36,7 +36,7 @@ namespace HardwareStoreWeb.Pages
 
 			if (password == null || password.Length == 0)
 			{
-				ViewData["ErrorMessage"] = "Пароль не может быть пустым!";
+				ViewData["ErrorMessage"] = "РџР°СЂРѕР»СЊ РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РїСѓСЃС‚С‹Рј!";
 				return OnGet();
 			}
 
@@ -44,7 +44,7 @@ namespace HardwareStoreWeb.Pages
 			var user = await _context.Users.Where(x => x.Id == id && x.Password == hashedPassword).FirstOrDefaultAsync();
 			if (user == null)
 			{
-				ViewData["ErrorMessage"] = "Пользователя с таким ИД и паролем не существует!";
+				ViewData["ErrorMessage"] = "РџРѕР»СЊР·РѕРІР°С‚РµР»СЏ СЃ С‚Р°РєРёРј РР” Рё РїР°СЂРѕР»РµРј РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚!";
 				return OnGet();
 			}
 
