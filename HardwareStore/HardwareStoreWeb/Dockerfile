@@ -7,14 +7,13 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["HardwareStoreWeb.csproj", "./HardwareStoreWeb/"]
-RUN dotnet restore "HardwareStoreWeb/HardwareStoreWeb.csproj"
+COPY ["HardwareStoreWeb.csproj", "./"]
+RUN dotnet restore "HardwareStoreWeb.csproj"
 COPY . .
 WORKDIR "/src/HardwareStoreWeb"
-RUN dotnet build "HardwareStoreWeb.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "HardwareStoreWeb.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "HardwareStoreWeb.csproj" -c Release -o /app/publish 
 
 FROM base AS final
 WORKDIR /app
