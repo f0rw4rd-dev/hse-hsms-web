@@ -120,11 +120,11 @@ INSERT INTO public."ComponentDetails" ("DetailTypeId", "ComponentId", "Value") V
 INSERT INTO public."Configurations" ("ConfigurationId", "Amount", "ComponentId") VALUES (1, 1, 1);
 INSERT INTO public."Configurations" ("ConfigurationId", "Amount", "ComponentId") VALUES (1, 1, 2);
 
-INSERT INTO public."Supplies" ("SupplyPrice", "Amount", "Date", "SupplierId", "ComponentId", "WarehouseId") VALUES (15390, 23, '2023-05-10 11:27:50.115327+05', 1, 1, 1);
-INSERT INTO public."Supplies" ("SupplyPrice", "Amount", "Date", "SupplierId", "ComponentId", "WarehouseId") VALUES (12380, 19, '2023-05-10 11:27:50.115327+05', 2, 1, 1);
-INSERT INTO public."Supplies" ("SupplyPrice", "Amount", "Date", "SupplierId", "ComponentId", "WarehouseId") VALUES (32870, 32, '2023-05-10 11:27:50.115327+05', 2, 2, 1);
-INSERT INTO public."Supplies" ("SupplyPrice", "Amount", "Date", "SupplierId", "ComponentId", "WarehouseId") VALUES (33650, 45, '2023-05-10 11:27:50.115327+05', 3, 2, 2);
+INSERT INTO public."Supplies" ("SupplyPrice", "Amount", "Date", "SupplierId", "ComponentId", "WarehouseId") VALUES (15390, 23, '2023-05-24 11:27:50.115327+05', 1, 1, 1);
+INSERT INTO public."Supplies" ("SupplyPrice", "Amount", "Date", "SupplierId", "ComponentId", "WarehouseId") VALUES (12380, 19, '2023-05-27 11:27:50.115327+05', 2, 1, 1);
+INSERT INTO public."Supplies" ("SupplyPrice", "Amount", "Date", "SupplierId", "ComponentId", "WarehouseId") VALUES (32870, 32, '2023-05-27 11:27:50.115327+05', 2, 2, 1);
+INSERT INTO public."Supplies" ("SupplyPrice", "Amount", "Date", "SupplierId", "ComponentId", "WarehouseId") VALUES (33650, 45, '2023-05-30 11:27:50.115327+05', 3, 2, 2);
 
-INSERT INTO public."Orders" ("Date", "Status") VALUES ('2023-05-10 11:27:50.115327+05', 0);
+INSERT INTO public."Orders" ("Date", "Status") VALUES ('2023-05-29 11:27:50.115327+05', 0);
 
 INSERT INTO public."OrderComponents" ("Price", "Amount", "IsPartOfConfiguration", "OrderId", "WarehouseId", "ComponentId") VALUES (13890, 2, false, 1, 1, 1);
