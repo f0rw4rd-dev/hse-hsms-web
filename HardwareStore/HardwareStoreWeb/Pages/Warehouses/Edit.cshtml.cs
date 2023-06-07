@@ -48,7 +48,14 @@ namespace HardwareStoreWeb.Pages.Warehouses
 				return await OnGetAsync(Warehouse.Id);
 			}
 
-			_context.Attach(Warehouse).State = EntityState.Modified;
+            var warehouseExist = await _context.Warehouses.Where(x => x.City == Warehouse.City && x.Street == Warehouse.Street && x.House == Warehouse.House && x.Id != Warehouse.Id).AnyAsync();
+            if (warehouseExist)
+            {
+                ViewData["ErrorMessage"] = "Склад с таким адресом уже существует!";
+                return await OnGetAsync(Warehouse.Id);
+            }
+
+            _context.Attach(Warehouse).State = EntityState.Modified;
 
 			try
 			{

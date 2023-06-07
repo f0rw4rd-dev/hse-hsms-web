@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using HardwareStoreWeb;
 using HardwareStoreWeb.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HardwareStoreWeb.Pages.Warehouses
 {
@@ -36,7 +37,14 @@ namespace HardwareStoreWeb.Pages.Warehouses
 				return OnGet();
 			}
 
-			_context.Warehouses.Add(Warehouse);
+            var warehouseExist = await _context.Warehouses.Where(x => x.City == Warehouse.City && x.Street == Warehouse.Street && x.House == Warehouse.House).AnyAsync();
+            if (warehouseExist)
+            {
+                ViewData["ErrorMessage"] = "Склад с таким адресом уже существует!";
+                return OnGet();
+            }
+
+            _context.Warehouses.Add(Warehouse);
 			await _context.SaveChangesAsync();
 
 			return RedirectToPage("./Index");
