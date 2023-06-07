@@ -31,7 +31,8 @@ namespace HardwareStoreWeb.Pages.Supplies
 			if (_context.Supplies != null)
 			{
 				Supply = await _context.Supplies
-				.Include(s => s.Component)
+				.OrderBy(x => x.Id)
+                .Include(s => s.Component)
 				.Include(s => s.Supplier)
 				.Include(s => s.Warehouse).ToListAsync();
 

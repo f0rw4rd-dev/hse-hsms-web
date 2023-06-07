@@ -73,7 +73,13 @@ namespace HardwareStoreWeb.Pages.Supplies
             }
 
 			Supply.Date = Supply.Date.ToUniversalTime();
-			_context.Attach(Supply).State = EntityState.Modified;
+            if (Supply.Date > DateTime.UtcNow)
+            {
+                ViewData["ErrorMessage"] = "Выбранная дата позже текущей!";
+                return await OnGetAsync(Supply.Id);
+            }
+
+            _context.Attach(Supply).State = EntityState.Modified;
 
 			try
 			{

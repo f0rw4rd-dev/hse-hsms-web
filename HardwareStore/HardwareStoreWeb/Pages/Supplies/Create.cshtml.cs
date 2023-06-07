@@ -61,7 +61,13 @@ namespace HardwareStoreWeb.Pages.Supplies
             }
 
 			Supply.Date = Supply.Date.ToUniversalTime();
-			_context.Supplies.Add(Supply);
+            if (Supply.Date > DateTime.UtcNow)
+            {
+                ViewData["ErrorMessage"] = "Выбранная дата позже текущей!";
+                return OnGet();
+            }
+
+            _context.Supplies.Add(Supply);
 			await _context.SaveChangesAsync();
 
 			return RedirectToPage("./Index");

@@ -37,6 +37,12 @@ namespace HardwareStoreWeb.Pages.Orders
 			}
 
 			Order.Date = Order.Date.ToUniversalTime();
+			if (Order.Date > DateTime.UtcNow)
+			{
+                ViewData["ErrorMessage"] = "Выбранная дата позже текущей!";
+                return OnGet();
+            }
+
 			_context.Orders.Add(Order);
 			await _context.SaveChangesAsync();
 

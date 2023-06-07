@@ -49,7 +49,13 @@ namespace HardwareStoreWeb.Pages.Orders
 			}
 
 			Order.Date = Order.Date.ToUniversalTime();
-			_context.Attach(Order).State = EntityState.Modified;
+            if (Order.Date > DateTime.UtcNow)
+            {
+                ViewData["ErrorMessage"] = "Выбранная дата позже текущей!";
+                return await OnGetAsync(Order.Id);
+            }
+
+            _context.Attach(Order).State = EntityState.Modified;
 
 			try
 			{
